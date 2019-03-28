@@ -1,11 +1,11 @@
 {
 	"name": "storytailor-vscode",
-	"displayName": "storytailor-vscode-plugin",
-	"description": "programming language for making stories",
+	"displayName": "Storytailor programming language support",
+	"description": "Adds Storytailor programming language support to vscode",
 	"author": "jack.storytailor",
 	"license": "MIT",
-	"version": "0.0.1",
-	"publisher": "jack.storytailor",
+	"version": "0.0.2",
+	"publisher": "jackstorytailor",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/jack-storytailor/storytailor-vscode-extension.git"
@@ -78,21 +78,15 @@
 			{
 				"language": "storytailor",
 				"scopeName": "source.storytailor",
-				"path": "./lib/syntaxes/storytailor2.tmLanguage.json"
+				"path": "./lib/syntaxes/storytailor.tmLanguage.json"
 			}
 		],
 		"themes": [
-			{
-				"label": "story-script",
-				"id": "story-script-theme",
-				"uiTheme": "vs-dark",
-				"path": "./lib/themes/story-script.json"
-			}
 		],
 		"commands": [
 			{
 				"command": "extension.stsCompile",
-				"title": "Compile Story Script",
+				"title": "Compile Storytailor",
 				"category": "Compile"
 			},
 			{
