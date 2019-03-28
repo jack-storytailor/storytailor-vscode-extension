@@ -1,0 +1,47 @@
+{
+  "name": "storytailor-vscode-extension",
+  "description": "plugin for vs code that adds support for storytailor programming language",
+  "author": "Jack Storytailor",
+  "license": "MIT",
+  "version": "0.0.2",
+  "publisher": "jack.storytailor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jack-storytailor/storytailor-vscode-extension.git"
+  },
+  "scripts": {
+    "update:all": "npm update && cd server && npm update && cd ../client && npm update",
+    "postinstall": "cd server && npm install && cd ../client && npm install && cd .. && cd readme && npm install && cd .. && cd storytailor && npm install && cd ..",
+    "install:server": "cd server && npm run installServer && cd ..",
+    "compile:all": "node tasks/compile.js",
+    "compile:storytailor": "tsc -p storytailor/tsconfig.json",
+    "compile:storytailor.server": "tsc -p storytailor/tsconfig.server.json",
+    "compile:storytailor.client": "tsc -p storytailor/tsconfig.client.json",
+    "compile:storytailor.plugin": "tsc -p storytailor/tsconfig.plugin.json",
+    "compile:client": "tsc -p client/tsconfig.json",
+    "compile:server": "cd server && npm run installServer && cd .. && tsc -p server/tsconfig.json",
+    "compile:readme": "node tasks/compile-readme.js",
+    "compile:plugin": "node tasks/compile.plugin.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "regexpu": "^4.5.2",
+    "storytailor": "^0.0.1"
+  },
+  "dependencies": {
+    "@types/node": "^11.9.4",
+    "typescript": "^3.3.3"
+  },
+  "bugs": {
+    "url": "https://github.com/jack-storytailor/storytailor-vscode-extension/issues"
+  },
+  "homepage": "https://github.com/jack-storytailor/storytailor-vscode-extension#readme",
+  "keywords": [
+    "storytailor",
+    "compiler",
+    "storytelling",
+    "programming",
+    "language"
+  ]
+}

@@ -1,0 +1,154 @@
+{
+	"name": "storytailor-vscode",
+	"displayName": "storytailor-vscode-plugin",
+	"description": "programming language for making stories",
+	"author": "jack.storytailor",
+	"license": "MIT",
+	"version": "0.0.1",
+	"publisher": "jack.storytailor",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jack-storytailor/storytailor-vscode-extension.git"
+	},
+	"homepage": "https://github.com/jack-storytailor/storytailor-vscode-extension",
+	"engines": {
+		"vscode": "^1.32.3"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"activationEvents": [
+		"onLanguage:storytailor",
+		"onCommand:extension.stsCompile",
+		"onCommand:extension.initExampleProject",
+		"onCommand:extension.updateNodeModules"
+	],
+	"main": "./out/src/extension",
+	"icon": "logo.png",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Storytailor configuration",
+			"properties": {
+				"storytailor.storytailorConfigPath": {
+					"scope": "resource",
+					"type": "string",
+					"default": "stsconfig.json",
+					"description": "path to the storytailor config relative to the workspace root"
+				},
+				"storytailor.typescriptConfigPath": {
+					"scope": "resource",
+					"type": "string",
+					"default": "tsconfig.json",
+					"description": "path to the typescript config relative to the workspace root"
+				},
+				"storytailor.isMultifileCompletions": {
+					"scope": "resource",
+					"type": "boolean",
+					"default": false,
+					"description": "if true then code completions may be collected from other .sts files"
+				},
+				"storytailor.previewHtmlTemplatePath": {
+					"scope": "resource",
+					"type": "string",
+					"default": "preview.html",
+					"description": "path to html file that is used as wrapper for storytailor preview"
+				}
+			}
+		},
+		"breakpoints": [
+			{
+				"language": "storytailor"
+			}
+		],
+		"languages": [
+			{
+				"id": "storytailor",
+				"aliases": [
+					"StoryTailor",
+					"storytailor"
+				],
+				"extensions": [
+					".sts"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "storytailor",
+				"scopeName": "source.storytailor",
+				"path": "./lib/syntaxes/storytailor2.tmLanguage.json"
+			}
+		],
+		"themes": [
+			{
+				"label": "story-script",
+				"id": "story-script-theme",
+				"uiTheme": "vs-dark",
+				"path": "./lib/themes/story-script.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "extension.stsCompile",
+				"title": "Compile Story Script",
+				"category": "Compile"
+			},
+			{
+				"command": "extension.stsCompileAndPreview",
+				"title": "Compile and show preview",
+				"category": "Compile"
+			},
+			{
+				"command": "extension.previewStorytailor",
+				"title": "Preview storytailor module"
+			},
+			{
+				"command": "extension.initExampleProject",
+				"title": "Initialize example storytailor project in a working root",
+				"category": "Initialize"
+			},
+			{
+				"command": "extension.updateNodeModules",
+				"title": "Update Node Modules"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.previewStorytailor",
+				"when": "resourceLangId == storytailor",
+				"key": "Ctrl+Shift+Alt+p"
+			}
+		],
+		"snippets": [
+			{
+				"language": "storytailor",
+				"path": "./lib/snippets/storytailor.json"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "extension.initExampleProject"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -p ./",
+		"watch": "tsc -w -p ./",
+		"update-vscode": "node ./node_modules/vscode/bin/install",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"dependencies": {
+		"storytailor": "^0.0.1",
+		"typescript": "^3.3.4000",
+		"vscode-languageclient": "^5.2.1"
+	},
+	"devDependencies": {
+		"ts-morph": "^1.3.1",
+		"vscode": "^1.1.33"
+	}
+}

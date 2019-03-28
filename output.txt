@@ -1,0 +1,41 @@
+# storyscript-vscode
+extension for vscode that provides support for the storyscript programming language
+
+note that this is a first build
+
+# how to get started
+
+1. Open empty folder
+![Open empty folder](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/empty_folder.png "Open empty folder")
+
+2. Create example project
+![Create example project](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/init_project_in_workspace.png "Create example project")
+
+3. File structure will look like this
+![File structure will look like this](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/initial_project_structure.png "File structure will look like this")
+
+4. Write your story
+![Write your story](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/write_your_story.png "Write your story")
+
+5. Open terminal (menu View/Terminal) or hotkey Ctrl+`
+![Terminal menu](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/open_terminal.png "Terminal menu")
+...>
+![Terminal](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/terminal.png "Terminal")
+
+type npm install into command line... 
+![npm install](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/npm_install_before.png "npm install")
+
+...and press enter. it will create node_modules folder and install all the dependencies from package.json in it
+![npm installed](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/npm_install_after.png "npm installed")
+
+6. It's time to compile project. Type 'npm run compile' into the command line and press Enter...
+![Compile project](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/npm_run_compile.png "compile project")
+
+...or press Ctrl+Shift+B, choose 'Compile' and press Enter...
+![Compile hotkey](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/select_build_task.png "Compile hotkey")
+
+7. Storyscript compiler takes .sts files from project_folder/src/ directory and compiles them to .js files in project_folder/out/ directory
+![Compiled](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/compiled_to_out.png "Compiled")
+
+8. Also it creates index.txt file your story renders to
+![Your story](https://raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/output_result.png "Your story")

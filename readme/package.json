@@ -1,0 +1,24 @@
+{
+  "name": "example-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "dependencies": {
+    "storyscript": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^6.14.3",
+    "typescript": "^3.3.3"
+  },
+  "scripts": {
+    "compile": "stsc -p stsconfig.json",
+    "compile:storyscript": "stsc -p stsconfig.json",
+    "compile:typescript": "tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://jack-storytailor.visualstudio.com/dolbozaichiki/_git/readme"
+  },
+  "author": "author name",
+  "license": "MIT"
+}

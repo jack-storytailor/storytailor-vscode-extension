@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compile",
+      "group": "build",
+      "type": "npm",
+      "script": "compile:all",
+      "problemMatcher": [ "$tsc" ]
+    },
+
+    {
+      "label": "compile:readme",
+      "group": "build",
+      "type": "npm",
+      "script": "compile:readme",
+      "problemMatcher": [ "$tsc" ]
+    },
+    {
+      "label": "compile:storyscript",
+      "group": "build",
+      "type": "npm",
+      "script": "compile:storyscript",
+      "problemMatcher": [
+        "$tsc"
+      ]
+    },
+    {
+      "label": "compile:storyscript.server",
+      "type": "npm",
+      "script": "compile:storyscript.server",
+      "group": "build",
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "compile:storyscript.client",
+      "type": "npm",
+      "script": "compile:storyscript.client",
+      "group": "build",
+      "problemMatcher": ["$tsc"]
+    },
+
+    {
+      "label": "compile:server",
+      "type": "npm",
+      "script": "compile:server",
+      "group": "build",
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "compile:client",
+      "type": "npm",
+      "script": "compile:client",
+      "group": "build",
+      "problemMatcher": ["$tsc"]
+    },
+
+    {
+      "label": "compile:storyscript.plugin",
+      "group": "build",
+      "type": "npm",
+      "script": "compile:storyscript.plugin",
+      "problemMatcher": [ "$tsc" ]
+    },
+    {
+      "label": "compile:plugin",
+      "group": "build",
+      "type": "npm",
+      "script": "compile:plugin",
+      "problemMatcher": [ "$tsc" ]
+    }
+
+  ]
+}

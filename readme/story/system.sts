@@ -1,0 +1,10 @@
+* hyperlink = function (@урл, @текст) {
+  return "[*@текст;](*@урл;)";
+}
+
+* localPhoto = function (@урл, @текст, @imgRoot) {
+  if (!@imgRoot) {
+    @imgRoot = "https:\//raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/";
+  }
+  return "![*@текст;](*@imgRoot;*@урл;)";
+}

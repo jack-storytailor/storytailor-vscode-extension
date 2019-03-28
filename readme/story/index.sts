@@ -1,0 +1,89 @@
+* import * as system from './system'
+* { @__context = {...@__context, ...system, __text: __text}; }
+
+# storyscript-vscode
+extension for vscode that provides support for the storyscript programming language
+
+note that this is an experimental build, so some rules may change
+
+*hyperlink("https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md", "Storyscript instruction");
+
+###This readme file was written on storyscript
+
+# Getting started
+
+The easiest way to start working is to open empty folder inside vscode and copy to that folder example project. To do that
+
+Open empty folder
+
+*localPhoto("vscode_empty.png", "Empty folder");
+
+Right-click on your project root folder and choose "Initialize example project in a working root" from dropdown menu
+
+*localPhoto("init_example_project.png", "init example project");
+
+This operation copies example project to your root folder. Keep in mind that this command will override corresponding files if any. 
+
+Confirm copying
+
+*localPhoto("confirm_init_example_project.png", "Confirm copying");
+
+Test project has been copied to your root folder. Structure of your project should look similar to this:
+
+*localPhoto("example_project_created.png", "example prject created");
+
+Install node modules. To do that
+
+Open terminal
+
+*localPhoto("open_terminal.png", "open terminal");
+
+Type command "npm install" or "npm i" into terminal and press "ENTER"
+
+*localPhoto("npm_install.png", "npm install in terminal");
+
+Node modules are installed
+
+*localPhoto("node_modules_created.png", "node modules are installed");
+
+Now you can close terminal
+
+*localPhoto("close_terminal.png", "Close terminal");
+
+Source files are in projectRoot/story folder (\*.sts)
+
+*localPhoto("story_source_files.png", "исходники истории");
+
+Project preparation is done. This is it's working state
+
+## Now it's time to build project
+Open file with story source. For instance, projectRoot/story/index.sts 
+
+Open Command Palette (Menu View -> Command Palette or Ctrl+Shift+P hotkey) 
+
+*localPhoto("command_palette.png", "command palette");
+
+*localPhoto("command_palette_openned.png", "command palette openned");
+
+Choose command "Compile: Compile and show preview" (Ctrl+Alt+P by default)
+
+*localPhoto("compile_and_show_preview.png", "compile and show preview");
+
+Story compiled to typescript are saved to projectRoot/src. 
+typescript files compiled to javascript are saved to projectRoot/out folder.
+
+*localPhoto("compiled_story.png", "compiled story");
+
+When story build is done, storyscript preview opens
+
+*localPhoto("preview_story.png", "Preview story");
+
+Preview window can be placed as you wish
+
+*localPhoto("layout_2.png", "layout variant 2");
+
+*localPhoto("layout_3.png", "layout variant 3");
+
+Text that is shown in preview window is saved to projectRoot/story output.txt file
+
+*localPhoto("story_output.png", "story output");
