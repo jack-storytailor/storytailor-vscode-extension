@@ -8,9 +8,6 @@
 	"typescript.tsdk": "./node_modules/typescript/lib",
   "typescript.tsc.autoDetect": "off",
   
-  "storyscript.storyscriptConfigPath": "readme/stsconfig.json",
-	"storyscript.typescriptConfigPath": "readme/tsconfig.json",
-	
 	"storytailor.storytailorConfigPath": "readme/stsconfig.json",
   "storytailor.typescriptConfigPath": "readme/tsconfig.json"
 }
