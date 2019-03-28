@@ -1,4 +1,4 @@
-import * as environment from 'storyscript/out/environment';
+import * as environment from 'storytailor/out/environment';
 
 export const getSerializer = () => {
   return {

@@ -1,14 +1,14 @@
 * import * as system from './system'
 * { @__context = {...@__context, ...system, __text: __text}; }
 
-# storyscript-vscode
-extension for vscode that provides support for the storyscript programming language
+# storytailor-vscode
+extension for vscode that provides support for the storytailor programming language
 
 note that this is an experimental build, so some rules may change
 
-*hyperlink("https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md", "Storyscript instruction");
+*hyperlink("https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md", "Storytailor instruction");
 
-###This readme file was written on storyscript
+###This readme file was written on storytailor
 
 # Getting started
 
@@ -74,7 +74,7 @@ typescript files compiled to javascript are saved to projectRoot/out folder.
 
 *localPhoto("compiled_story.png", "compiled story");
 
-When story build is done, storyscript preview opens
+When story build is done, storytailor preview opens
 
 *localPhoto("preview_story.png", "Preview story");
 

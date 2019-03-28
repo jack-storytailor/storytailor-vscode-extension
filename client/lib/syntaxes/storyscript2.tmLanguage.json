@@ -1,15 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "StoryScript",
-  "scopeName": "source.storyscript",
+  "name": "StoryTailor",
+  "scopeName": "source.storytailor",
   "patterns": [
     {
-      "include": "#storyScript"
+      "include": "#storytailor"
     }
   ],
   "repository": {
     
-    "storyScript": {
+    "storytailor": {
       "patterns": [
         {
           "include": "#comment-line"

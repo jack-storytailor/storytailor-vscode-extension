@@ -4,7 +4,7 @@
   "description": "",
   "main": "./index.js",
   "dependencies": {
-    "storyscript": "^1.4.14"
+    "storytailor": "^1.4.14"
   },
   "devDependencies": {
     "@types/node": "^11.9.5",
@@ -13,7 +13,7 @@
   "scripts": {
     "compileAndRun": "stsc stsconfig.json -ts tsconfig.json && node ./tasks/print_story.js",
     "compile": "stsc stsconfig.json -ts tsconfig.json",
-    "compile:storyscript": "stsc stsconfig.json",
+    "compile:storytailor": "stsc stsconfig.json",
     "compile:typescript": "tsc -p tsconfig.json"
   },
   "repository": {

@@ -9,31 +9,31 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { workspace, ExtensionContext } from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind, DiagnosticSeverity } from 'vscode-languageclient/lib/main';
-import * as fsUtils from 'storyscript/out/fileSystem/fsUtils';
-import * as compileUtils from 'storyscript/out/compilation/compileUtils';
-import { ICompileRequest } from 'storyscript/out/shared/ICompileRequest';
-import { ICompileError } from 'storyscript/out/shared/ICompileError';
-import { ICompilerState } from 'storyscript/out/shared/ICompilerState';
-import { IDiagnostic } from 'storyscript/out/shared/IParsingError';
+import * as fsUtils from 'storytailor/out/fileSystem/fsUtils';
+import * as compileUtils from 'storytailor/out/compilation/compileUtils';
+import { ICompileRequest } from 'storytailor/out/shared/ICompileRequest';
+import { ICompileError } from 'storytailor/out/shared/ICompileError';
+import { ICompilerState } from 'storytailor/out/shared/ICompilerState';
+import { IDiagnostic } from 'storytailor/out/shared/IParsingError';
 import { encode } from 'punycode';
 
-let storyscriptPreviewPanel: vscode.WebviewPanel = undefined; 
-let storyscriptPreviewHtmlTemplate: string = undefined;
+let storytailorPreviewPanel: vscode.WebviewPanel = undefined; 
+let storytailorPreviewHtmlTemplate: string = undefined;
 
 enum configFields {
-  storyscriptConfigPath = 'storyscriptConfigPath',
+  storytailorConfigPath = 'storytailorConfigPath',
   typescriptConfigPath = 'typescriptConfigPath',
   previewHtmlTemplatePath = 'previewHtmlTemplatePath',
 }
 
 interface IStsSettings {
-  storyscriptConfigPath: string;
+  storytailorConfigPath: string;
   typescriptConfigPath: string;
   previewHtmlTemplatePath?: string;
 }
 
 let defaultSettings: IStsSettings = {
-  storyscriptConfigPath: 'stsconfig.json',
+  storytailorConfigPath: 'stsconfig.json',
   typescriptConfigPath: 'tsconfig.json',
   previewHtmlTemplatePath: undefined,
 }
@@ -43,18 +43,16 @@ let extensionContext: vscode.ExtensionContext = undefined;
 let diagnosicCollection: vscode.DiagnosticCollection = undefined;
 
 const initShowPreview = (context: vscode.ExtensionContext) => {
-  initStoryscriptWebviewPanel();
+  initStorytailorWebviewPanel();
   
-  let disposable = vscode.commands.registerCommand('extension.previewStoryscript', () => {
-    storyscriptPreviewPanel.reveal(vscode.ViewColumn.Two, true);
+  let disposable = vscode.commands.registerCommand('extension.previewStorytailor', () => {
+    storytailorPreviewPanel.reveal(vscode.ViewColumn.Two, true);
   });
   context.subscriptions.push(disposable);
 }
 
-// let diagnostics = vscode.languages.getDiagnostics()
-
 const stsCompile = () => {
-  let configPath = path.resolve(vscode.workspace.rootPath, settings.storyscriptConfigPath);
+  let configPath = path.resolve(vscode.workspace.rootPath, settings.storytailorConfigPath);
   let tsConfigPath = path.resolve(vscode.workspace.rootPath, settings.typescriptConfigPath);
   console.log('sts config path', configPath, 'ts config path', tsConfigPath);
   let compileRequest: ICompileRequest = {
@@ -111,15 +109,15 @@ const stsCompile = () => {
 }
 
 const stsCompileAndPreview = () => {
-  if (!storyscriptPreviewPanel) {
-    initStoryscriptWebviewPanel();
+  if (!storytailorPreviewPanel) {
+    initStorytailorWebviewPanel();
   }
 
   // update document content
-  storyscriptPreviewPanel.webview.html = getStoryscriptPreviewHtml();
+  storytailorPreviewPanel.webview.html = getStorytailorPreviewHtml();
 
   // textDocProvider.update(previewUri);
-  vscode.commands.executeCommand('extension.previewStoryscript').then((success) => { }, (reason) => { vscode.window.showErrorMessage(reason); });
+  vscode.commands.executeCommand('extension.previewStorytailor').then((success) => { }, (reason) => { vscode.window.showErrorMessage(reason); });
 }
 
 const stringFormat = function(template: string): string {
@@ -142,14 +140,13 @@ const getPreviewHtmlTemplate = (): string => {
 
     if (templatePath) {
       // check have we already loaded that file
-      if (storyscriptPreviewHtmlTemplate && storyscriptPreviewHtmlTemplate.length > 0) {
-        return storyscriptPreviewHtmlTemplate;
+      if (storytailorPreviewHtmlTemplate && storytailorPreviewHtmlTemplate.length > 0) {
+        return storytailorPreviewHtmlTemplate;
       }
       
       templatePath = path.resolve(vscode.workspace.rootPath, templatePath);
       if (fs.existsSync(templatePath)) {
         let template = fs.readFileSync(templatePath, 'utf8').toString();
-        // storyscriptPreviewHtmlTemplate = template || undefined;
         return template;
       }
     }
@@ -177,8 +174,8 @@ const getPreviewHtmlTemplate = (): string => {
       `;
 }
 
-const getStoryscriptPreviewHtml = (): string => {
-  let documentContent: string = getStoryscriptPreviewText();
+const getStorytailorPreviewHtml = (): string => {
+  let documentContent: string = getStorytailorPreviewText();
   let title: string = 'Preview Story';
   let template = getPreviewHtmlTemplate();
 
@@ -212,29 +209,29 @@ const getStoryscriptPreviewHtml = (): string => {
   `;
 }
 
-const getStoryscriptPreviewText = (): string => {
+const getStorytailorPreviewText = (): string => {
   let compileResult = stsCompile();
   if (!compileResult || !compileResult.config) {
-    return `No Storyscript config found;\r\n${compileResult}`;
+    return `No StoryTailor config found;\r\n${compileResult}`;
   }
 
   let activeTextEditor = vscode.window.activeTextEditor;
   if (activeTextEditor) {
     let fileName = activeTextEditor.document.fileName;
     let workspaceFolder = vscode.workspace.rootPath;
-    let configFileName = compileResult.request.configPath || workspaceFolder + '/' + settings.storyscriptConfigPath;
+    let configFileName = compileResult.request.configPath || workspaceFolder + '/' + settings.storytailorConfigPath;
     configFileName = path.normalize(configFileName);
     let outputFileName = workspaceFolder + '/story output.txt';
     if (fileName.endsWith('.sts')) {
 
       try {
-        // execute 'storyscript/out/index.js workspaceFolder fileName configFileName outputFileName
+        // execute 'storytailor/out/index.js workspaceFolder fileName configFileName outputFileName
         let child_process = require('child_process');
-        let storyscriptJsFile = require.resolve('storyscript/out/printer.js');
+        let storytailorJsFile = require.resolve('storytailor/out/printer.js');
         let relativeSourceFileName = fsUtils.getRelativeFileName(fileName, compileResult.config.sourceRoot);
         relativeSourceFileName = path.dirname(relativeSourceFileName) + '/' + path.basename(relativeSourceFileName, path.extname(relativeSourceFileName)) + '.js';
         let relativeOutputFileName = fsUtils.getRelativeFileName(outputFileName, compileResult.config.sourceRoot);
-        let command = `node "${storyscriptJsFile}" "${configFileName}" "${relativeSourceFileName}" "${relativeOutputFileName}"`;
+        let command = `node "${storytailorJsFile}" "${configFileName}" "${relativeSourceFileName}" "${relativeOutputFileName}"`;
         console.log('executing ', command, '...');
         let execResult = child_process.execSync(command).toString();
         console.log('execute result is', execResult);
@@ -271,14 +268,14 @@ const initExampleProject = () => {
 }
 
 const updateNodeModules = () => {
-  let targetPath = path.normalize(vscode.workspace.rootPath + '/node_modules/storyscript');
+  let targetPath = path.normalize(vscode.workspace.rootPath + '/node_modules/storytailor');
 
-  let storyscriptPath = require.resolve('storyscript');
+  let storytailorPath = require.resolve('storytailor');
 
-  storyscriptPath = path.dirname(storyscriptPath);
+  storytailorPath = path.dirname(storytailorPath);
 
   fsUtils.mkDirByPathSync(targetPath);
-  fsUtils.copyDirectory(storyscriptPath, targetPath);
+  fsUtils.copyDirectory(storytailorPath, targetPath);
 }
 
 const insertText = (text: string, isMoveCursor: boolean) => {
@@ -315,7 +312,7 @@ const initStsCompileCommand = (context: ExtensionContext) => {
   
     try {
       stsCompile();
-      vscode.window.showInformationMessage(`storyscript: Compile done`);
+      vscode.window.showInformationMessage(`storytailor: Compile done`);
     } catch (error) {
       vscode.window.showErrorMessage(`Error during executing command Compile: ${error}`);
     }
@@ -327,7 +324,7 @@ const initStsCompileAndPreviewCommand = (context: ExtensionContext) => {
   
     try {
       stsCompileAndPreview();
-      vscode.window.showInformationMessage(`storyscript: Compile And Preview done`);
+      vscode.window.showInformationMessage(`storytailor: Compile And Preview done`);
     } catch (error) {
       vscode.window.showErrorMessage(`Error during executing command Compile And Preview: ${error}`);
     }
@@ -391,17 +388,17 @@ const initLanguageServer = (context: ExtensionContext) => {
 	// Options to control the language client
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
-		documentSelector: [{ scheme: 'file', language: 'storyscript' }],
+		documentSelector: [{ scheme: 'file', language: 'storytailor' }],
 		synchronize: {
 			// Synchronize the setting section 'languageServerExample' to the server
-			configurationSection: 'storyscript',
+			configurationSection: 'storytailor',
 			// Notify the server about file changes to '.clientrc files contain in the workspace
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		}
 	}
 
 	// Create the language client and start the client.
-	let disposable = new LanguageClient('storyScript', 'storyscript language server', serverOptions, clientOptions).start();
+	let disposable = new LanguageClient('storytailor', 'storytailor language server', serverOptions, clientOptions).start();
 
 	// Push the disposable to the context's subscriptions so that the 
 	// client can be deactivated on extension deactivation
@@ -409,25 +406,25 @@ const initLanguageServer = (context: ExtensionContext) => {
 }
 
 const readConfiguration = () => {
-  let configSectionName = 'storyscript';
+  let configSectionName = 'storytailor';
   let configSection = workspace.getConfiguration(configSectionName);
   if (configSection) {
-    if (!configSection.has(configFields.storyscriptConfigPath)) {
-      configSection.update(configSectionName + '.' + configFields.storyscriptConfigPath, defaultSettings.storyscriptConfigPath);
+    if (!configSection.has(configFields.storytailorConfigPath)) {
+      configSection.update(configSectionName + '.' + configFields.storytailorConfigPath, defaultSettings.storytailorConfigPath);
     }
     if (!configSection.has(configFields.typescriptConfigPath)) {
       configSection.update(configSectionName + '.' + configFields.typescriptConfigPath, defaultSettings.typescriptConfigPath);
     }
-    if (!configSection.has(configFields.storyscriptConfigPath)) {
-      configSection.update(configSectionName + '.' + configFields.storyscriptConfigPath, defaultSettings.storyscriptConfigPath);
+    if (!configSection.has(configFields.storytailorConfigPath)) {
+      configSection.update(configSectionName + '.' + configFields.storytailorConfigPath, defaultSettings.storytailorConfigPath);
     }
 
-    let stsConfigPath = configSection.get<string>(configFields.storyscriptConfigPath) || defaultSettings.storyscriptConfigPath;
+    let stsConfigPath = configSection.get<string>(configFields.storytailorConfigPath) || defaultSettings.storytailorConfigPath;
     let tsConfigPath = configSection.get<string>(configFields.typescriptConfigPath) || defaultSettings.typescriptConfigPath;
     let previewHtmlTemplatePath = configSection.get<string>(configFields.previewHtmlTemplatePath) || defaultSettings.previewHtmlTemplatePath;
 
     settings = {
-      storyscriptConfigPath: stsConfigPath,
+      storytailorConfigPath: stsConfigPath,
       typescriptConfigPath: tsConfigPath,
       previewHtmlTemplatePath: previewHtmlTemplatePath
     };
@@ -439,9 +436,9 @@ const readConfiguration = () => {
   console.log('settings are ', settings);
 }
 
-function initStoryscriptWebviewPanel() {
-  storyscriptPreviewPanel = vscode.window.createWebviewPanel(
-    'storyscript-preview', 
+function initStorytailorWebviewPanel() {
+  storytailorPreviewPanel = vscode.window.createWebviewPanel(
+    'storytailor-preview', 
     'Preview story', {
       preserveFocus: true,
       viewColumn: vscode.ViewColumn.Two
@@ -451,8 +448,8 @@ function initStoryscriptWebviewPanel() {
     }
   );
 
-  storyscriptPreviewPanel.onDidDispose(() => {
-    storyscriptPreviewPanel = undefined;
+  storytailorPreviewPanel.onDidDispose(() => {
+    storytailorPreviewPanel = undefined;
   });
 }
 
@@ -466,5 +463,5 @@ export function activate(context: ExtensionContext) {
   initShowPreview(context);
 
   extensionContext = context;
-  diagnosicCollection = vscode.languages.createDiagnosticCollection("storyscript");
+  diagnosicCollection = vscode.languages.createDiagnosticCollection("storytailor");
 }

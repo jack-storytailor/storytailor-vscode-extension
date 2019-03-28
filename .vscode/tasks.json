@@ -17,25 +17,25 @@
       "problemMatcher": [ "$tsc" ]
     },
     {
-      "label": "compile:storyscript",
+      "label": "compile:storytailor",
       "group": "build",
       "type": "npm",
-      "script": "compile:storyscript",
+      "script": "compile:storytailor",
       "problemMatcher": [
         "$tsc"
       ]
     },
     {
-      "label": "compile:storyscript.server",
+      "label": "compile:storytailor.server",
       "type": "npm",
-      "script": "compile:storyscript.server",
+      "script": "compile:storytailor.server",
       "group": "build",
       "problemMatcher": ["$tsc"]
     },
     {
-      "label": "compile:storyscript.client",
+      "label": "compile:storytailor.client",
       "type": "npm",
-      "script": "compile:storyscript.client",
+      "script": "compile:storytailor.client",
       "group": "build",
       "problemMatcher": ["$tsc"]
     },
@@ -53,21 +53,6 @@
       "script": "compile:client",
       "group": "build",
       "problemMatcher": ["$tsc"]
-    },
-
-    {
-      "label": "compile:storyscript.plugin",
-      "group": "build",
-      "type": "npm",
-      "script": "compile:storyscript.plugin",
-      "problemMatcher": [ "$tsc" ]
-    },
-    {
-      "label": "compile:plugin",
-      "group": "build",
-      "type": "npm",
-      "script": "compile:plugin",
-      "problemMatcher": [ "$tsc" ]
     }
 
   ]

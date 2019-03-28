@@ -9,9 +9,9 @@ __context['system'] = require('./system');
 __text : __context['__text']
 };
 ;
-__context['__text'] = [...__context['__text'], `# storyscript-vscode`];
+__context['__text'] = [...__context['__text'], `# storytailor-vscode`];
 ;
-__context['__text'] = [...__context['__text'], `extension for vscode that provides support for the storyscript programming language`];
+__context['__text'] = [...__context['__text'], `extension for vscode that provides support for the storytailor programming language`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -19,11 +19,11 @@ __context['__text'] = [...__context['__text'], `note that this is an experimenta
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['hyperlink'](`https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md`, `Storyscript instruction`), '\r\n' )}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['hyperlink'](`https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md`, `Storytailor instruction`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `###This readme file was written on storyscript`];
+__context['__text'] = [...__context['__text'], `###This readme file was written on storytailor`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -155,7 +155,7 @@ __context['__text'] = [...__context['__text'], `${__serializer.serialize( __cont
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `When story build is done, storyscript preview opens`];
+__context['__text'] = [...__context['__text'], `When story build is done, storytailor preview opens`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;

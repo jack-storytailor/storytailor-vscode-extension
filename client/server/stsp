@@ -6,10 +6,10 @@ case `uname` in
 esac
 
 if [ -x "$basedir/node" ]; then
-  "$basedir/node"  "$basedir/node_modules/storyscript/bin/stsp" "$@"
+  "$basedir/node"  "$basedir/node_modules/storytailor/bin/stsp" "$@"
   ret=$?
 else 
-  node  "$basedir/node_modules/storyscript/bin/stsp" "$@"
+  node  "$basedir/node_modules/storytailor/bin/stsp" "$@"
   ret=$?
 fi
 exit $ret

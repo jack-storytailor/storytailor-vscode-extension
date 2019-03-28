@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const environment = require("storyscript/out/environment");
+const environment = require("storytailor/out/environment");
 exports.getSerializer = () => {
     return {
         serialize: (obj, separator) => {

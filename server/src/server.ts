@@ -17,9 +17,9 @@ import {
   CompletionItemKind
 } from 'vscode-languageserver';
 
-import { ICodeToken } from 'storyscript/out/shared/ICodeToken';
-import { CodeTokenType } from 'storyscript/out/shared/CodeTokenType';
-import { stsTokenizer } from 'storyscript/out/tokenizing/stsTokenizer';
+import { ICodeToken } from 'storytailor/out/shared/ICodeToken';
+import { CodeTokenType } from 'storytailor/out/shared/CodeTokenType';
+import { stsTokenizer } from 'storytailor/out/tokenizing/stsTokenizer';
 import { clearTimeout } from 'timers';
 
 let completions: { [key: string]: CompletionItem[] } = {}
@@ -36,7 +36,7 @@ let documents: TextDocuments = new TextDocuments();
 documents.listen(connection);
 
 interface Settings {
-  storyscript: ExampleSettings;
+  storytailor: ExampleSettings;
 }
 interface ExampleSettings {
   isMultifileCompletions: boolean;
@@ -46,7 +46,7 @@ let isMultifileCompletions: boolean;
 
 connection.onDidChangeConfiguration((change) => {
   let settings = <Settings>change.settings;
-  isMultifileCompletions = settings.storyscript.isMultifileCompletions;
+  isMultifileCompletions = settings.storytailor.isMultifileCompletions;
 });
 
 // connection.sendDiagnostics({uri: })
@@ -202,7 +202,7 @@ connection.onCompletion((_textDocumentPosition: TextDocumentPositionParams): Com
 	// 		data: 2
 	// 	},
 	// 	{
-	// 		label: 'StoryScript',
+	// 		label: 'storytailor',
 	// 		kind: CompletionItemKind.Text,
 	// 		data: 3
 	// 	},
@@ -220,8 +220,8 @@ connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
 		item.detail = 'JavaScript details',
 		item.documentation = 'JavaScript documentation'
 	} else if (item.data === 3) {
-		item.detail = 'StoryScript details',
-		item.documentation = 'StoryScript documentation'
+		item.detail = 'StoryTailor details',
+		item.documentation = 'StoryTailor documentation'
 	}
 	return item;
 });

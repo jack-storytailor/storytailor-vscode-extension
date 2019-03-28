@@ -8,7 +8,7 @@ __context['hyperlink'] = function (урл, текст) {
 };
 __context['localPhoto'] = function (урл, текст, imgRoot) {
     if (!imgRoot) {
-        imgRoot = `https:\//raw.githubusercontent.com/freewebtime/storyscript-vscode-extension/master/client/lib/images/`;
+        imgRoot = `https:\//raw.githubusercontent.com/freewebtime/storytailor-vscode-extension/master/client/lib/images/`;
     }
     ;
     return `![${__serializer.serialize(текст, '\r\n')}](${__serializer.serialize(imgRoot, '\r\n')}${__serializer.serialize(урл, '\r\n')})`;

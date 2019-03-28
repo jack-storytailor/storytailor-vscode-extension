@@ -5,8 +5,8 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode_languageserver_1 = require("vscode-languageserver");
-const CodeTokenType_1 = require("storyscript/out/shared/CodeTokenType");
-const stsTokenizer_1 = require("storyscript/out/tokenizing/stsTokenizer");
+const CodeTokenType_1 = require("storytailor/out/shared/CodeTokenType");
+const stsTokenizer_1 = require("storytailor/out/tokenizing/stsTokenizer");
 const timers_1 = require("timers");
 let completions = {};
 let allCompletions = [];
@@ -22,7 +22,7 @@ documents.listen(connection);
 let isMultifileCompletions;
 connection.onDidChangeConfiguration((change) => {
     let settings = change.settings;
-    isMultifileCompletions = settings.storyscript.isMultifileCompletions;
+    isMultifileCompletions = settings.storytailor.isMultifileCompletions;
 });
 // connection.sendDiagnostics({uri: })
 // After the server has started the client sends an initialize request. The server receives
@@ -145,7 +145,7 @@ connection.onCompletion((_textDocumentPosition) => {
     // 		data: 2
     // 	},
     // 	{
-    // 		label: 'StoryScript',
+    // 		label: 'storytailor',
     // 		kind: CompletionItemKind.Text,
     // 		data: 3
     // 	},
@@ -163,8 +163,8 @@ connection.onCompletionResolve((item) => {
             item.documentation = 'JavaScript documentation';
     }
     else if (item.data === 3) {
-        item.detail = 'StoryScript details',
-            item.documentation = 'StoryScript documentation';
+        item.detail = 'StoryTailor details',
+            item.documentation = 'StoryTailor documentation';
     }
     return item;
 });
