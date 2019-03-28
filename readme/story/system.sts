@@ -4,7 +4,7 @@
 
 * localPhoto = function (@урл, @текст, @imgRoot) {
   if (!@imgRoot) {
-    @imgRoot = "https:\//raw.githubusercontent.com/freewebtime/storytailor-vscode-extension/master/client/lib/images/";
+    @imgRoot = "https:\//raw.githubusercontent.com/jack-storytailor/storytailor-vscode-extension/master/client/lib/images/";
   }
   return "![*@текст;](*@imgRoot;*@урл;)";
 }
