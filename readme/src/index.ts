@@ -19,7 +19,7 @@ __context['__text'] = [...__context['__text'], `note that this is an experimenta
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['hyperlink'](`https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md`, `Storytailor instruction`), '\r\n' )}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['hyperlink'](`https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md`, `Storytailor instruction (rus)`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;

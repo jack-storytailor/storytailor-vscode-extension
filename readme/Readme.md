@@ -3,7 +3,7 @@ extension for vscode that provides support for the storytailor programming langu
 
 note that this is an experimental build, so some rules may change
 
-[Storytailor instruction](https://github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md)
+[Storytailor instruction (rus)](https://github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md)
 
 ###This readme file was written on storytailor
 
