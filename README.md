@@ -1,0 +1,1 @@
+# storytailor-vscode-extension
