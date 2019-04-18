@@ -36,6 +36,43 @@ const initShowPreview = (context) => {
 };
 const stsCompile = () => {
     let configPath = path.resolve(vscode.workspace.rootPath, settings.storytailorConfigPath);
+    console.log('sts config path', configPath);
+    let compileRequest = {
+        configPath: configPath,
+        filePath: undefined,
+        output: undefined
+    };
+    let compileResult = compileUtils.compile(compileRequest);
+    if (compileResult) {
+        diagnosicCollection.clear();
+        let sortedDiagnostics = compileResult.sortedDiagnostics;
+        if (sortedDiagnostics) {
+            for (const filePath in sortedDiagnostics) {
+                if (sortedDiagnostics.hasOwnProperty(filePath)) {
+                    let uri = vscode.Uri.file(filePath);
+                    const fileDiagnostics = sortedDiagnostics[filePath];
+                    let diagnostics = [];
+                    for (let k = 0; k < fileDiagnostics.length; k++) {
+                        const fDiag = fileDiagnostics[k];
+                        let fDiagStart = fDiag.range.start || { line: 0, column: 0, symbol: 0 };
+                        let fDiagEnd = fDiag.range.start || { line: 0, column: 0, symbol: 0 };
+                        let fDiagRange = new vscode.Range(new vscode.Position(fDiagStart.line, fDiagStart.column), new vscode.Position(fDiagEnd.line, fDiagEnd.column));
+                        let diag = new vscode.Diagnostic(fDiagRange, fDiag.message, fDiag.severity);
+                        diagnostics = [
+                            ...diagnostics,
+                            diag
+                        ];
+                    }
+                    diagnosicCollection.set(uri, diagnostics);
+                }
+            }
+        }
+    }
+    console.log('compilation ends with result', compileResult);
+    return compileResult;
+};
+const stsCompileWithTypescript = () => {
+    let configPath = path.resolve(vscode.workspace.rootPath, settings.storytailorConfigPath);
     let tsConfigPath = path.resolve(vscode.workspace.rootPath, settings.typescriptConfigPath);
     console.log('sts config path', configPath, 'ts config path', tsConfigPath);
     let compileRequest = {

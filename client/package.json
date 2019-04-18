@@ -85,26 +85,26 @@
 		"commands": [
 			{
 				"command": "extension.stsCompile",
-				"title": "Compile Storytailor",
+				"title": "Storytailor: Compile Storytailor",
 				"category": "Compile"
 			},
 			{
 				"command": "extension.stsCompileAndPreview",
-				"title": "Compile and show preview",
+				"title": "Storytailor: Compile and show preview",
 				"category": "Compile"
 			},
 			{
 				"command": "extension.previewStorytailor",
-				"title": "Preview storytailor module"
+				"title": "Storytailor: Preview storytailor module"
 			},
 			{
 				"command": "extension.initExampleProject",
-				"title": "Initialize example storytailor project in a working root",
+				"title": "Storytailor: Initialize example storytailor project in a working root",
 				"category": "Initialize"
 			},
 			{
 				"command": "extension.updateNodeModules",
-				"title": "Update Node Modules"
+				"title": "Storytailor: Rewrite Storytailor npm modules with extension's one"
 			}
 		],
 		"keybindings": [
