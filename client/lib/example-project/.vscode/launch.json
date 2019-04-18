@@ -28,6 +28,18 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Compile and Debug story",
+      "program": "${workspaceFolder}/tasks/debug_story.js",
+      "sourceMaps": true,
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "compile",
+      "outFiles": [
+        "${workspaceRoot}/out/**/*.js"
+      ],
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Debug Story without build",
       "program": "${workspaceFolder}/out/index.js",
       "sourceMaps": true,
