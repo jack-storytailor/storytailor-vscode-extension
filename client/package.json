@@ -136,7 +136,7 @@
 		"postinstall": "node ./node_modules/vscode/bin/install"
 	},
 	"dependencies": {
-		"storytailor": "^0.0.5",
+		"storytailor": "^0.0.7",
 		"vscode-languageclient": "^5.2.1"
 	},
 	"devDependencies": {
