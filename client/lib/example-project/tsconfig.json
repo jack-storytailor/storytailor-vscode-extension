@@ -10,10 +10,11 @@
 		"moduleResolution": "node",
 		"lib": [ "es2016" ],
     "sourceMap": true,
-    "allowJs": false,
+		"allowJs": false,
+		"jsx": "react",
 
-		"rootDir": "./src",
-		"outDir": "./out"
+		"rootDir": "./tsrc",
+		"outDir": "./tsrc"
   },
 	"exclude": [
 		"node_modules",

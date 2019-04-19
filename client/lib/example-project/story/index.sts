@@ -15,7 +15,7 @@ The example story
 -------------------------------- // just line of dashes
 // module characters contain two fields: 'main hero' and villan. 
 // let's reference 'main hero'
-And here is our winner: *characters.main hero;
+And here is our winner: *characters.Protagonist;
 
 --------------------------------
 and here how you can call functions.
@@ -26,6 +26,6 @@ this module (*environment2.toString();) contains testFunction(param1, param2) th
 
 The result of the function call is
 Expected:
-  param1: Protagonistman, param2: Villanman
+  param1: Main hero, param2: Super-Villan
 Actual
-  *environment2.testFunction(characters.'main hero', characters.villan);
+  *environment2.testFunction(characters.Protagonist, characters.Villan);

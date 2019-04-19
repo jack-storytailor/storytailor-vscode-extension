@@ -1,0 +1,23 @@
+The example story
+
+Chapter 1
+
+story begins in a first chapter as soon as Main hero meets Super-Villan 
+
+Chapter 2
+
+story ends in a second chapter as soon as Main hero defeats Super-Villan
+
+-------------------------------- 
+And here is our winner: Main hero
+
+--------------------------------
+and here how you can call functions.
+let's reference module storytailor/out/environment from node_modules
+this module ([object Object]) contains testFunction(param1, param2) that can be called from mention:
+
+The result of the function call is
+Expected:
+  param1: Main hero, param2: Super-Villan
+Actual
+  param1: Main hero, param2: Super-Villan
