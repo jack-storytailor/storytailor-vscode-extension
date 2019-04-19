@@ -43,7 +43,7 @@ let extensionContext: vscode.ExtensionContext = undefined;
 let diagnosicCollection: vscode.DiagnosticCollection = undefined;
 
 const initShowPreview = (context: vscode.ExtensionContext) => {
-  initStorytailorWebviewPanel();
+  // initStorytailorWebviewPanel();
   
   let disposable = vscode.commands.registerCommand('extension.previewStorytailor', () => {
     storytailorPreviewPanel.reveal(vscode.ViewColumn.Two, true);
