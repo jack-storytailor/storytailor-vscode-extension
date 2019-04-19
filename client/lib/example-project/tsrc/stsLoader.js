@@ -9,6 +9,10 @@ function default_1(source) {
         const loaderContext = this;
         const loaderOptions = loaderUtils.getOptions(loaderContext);
         const config = loaderOptions.stsConfig;
+        if (!loaderOptions.stsConfig) {
+            this.emitError(new Error("Can't extract stsConfig from options! " + loaderContext.resourcePath));
+            return undefined;
+        }
         let sourceFileName = loaderContext.resourcePath;
         let tokens = storytailor.stsTokenizer.stsTokenizer.tokenizeCode(source);
         if (!tokens || tokens.length <= 0) {

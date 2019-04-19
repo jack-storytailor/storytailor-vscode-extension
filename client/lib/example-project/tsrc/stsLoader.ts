@@ -1,19 +1,19 @@
 import * as loaderUtils from "loader-utils";
+import * as webpack from "webpack";
 import * as storytailor from "storytailor/out";
 import * as jsCompiler from 'storytailor/out/compilation/jsCompiler';
 import * as astParser from 'storytailor/out/parsing/astParser2';
-import { ILoaderContext } from "./types";
-import { IStsConfig } from "storytailor/out/shared/IStsConfig";
 
-interface ILoaderOptions {
-  stsConfig: IStsConfig;
-}
-
-export default function(this: ILoaderContext, source: string): string {
+export default function(this: webpack.loader.LoaderContext, source: string): string {
   try {
     const loaderContext = this;
-    const loaderOptions: ILoaderOptions = loaderUtils.getOptions(loaderContext);
+    const loaderOptions = loaderUtils.getOptions(loaderContext);
     const config = loaderOptions.stsConfig;
+    if (!loaderOptions.stsConfig) {
+      this.emitError(new Error("Can't extract stsConfig from options! " + loaderContext.resourcePath));
+      return undefined;
+    }
+
     let sourceFileName = loaderContext.resourcePath;
   
     let tokens = storytailor.stsTokenizer.stsTokenizer.tokenizeCode(source);
