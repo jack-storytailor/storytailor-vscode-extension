@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+			"name": "Run Story in Browser",
+			"type": "node",
+      "request": "attach",
+      "stopOnEntry": false,
+			"port": 8080,
+			"sourceMaps": true,
+			"outFiles": [
+				"${workspaceRoot}/out/**/*.js"
+      ],
+      "preLaunchTask": "webpack-hot-start"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Print story",

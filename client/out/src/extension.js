@@ -28,7 +28,7 @@ let settings = Object.assign({}, defaultSettings);
 let extensionContext = undefined;
 let diagnosicCollection = undefined;
 const initShowPreview = (context) => {
-    initStorytailorWebviewPanel();
+    // initStorytailorWebviewPanel();
     let disposable = vscode.commands.registerCommand('extension.previewStorytailor', () => {
         storytailorPreviewPanel.reveal(vscode.ViewColumn.Two, true);
     });

@@ -2,18 +2,6 @@
 	"version": "0.2.0",
 	// List of configurations. Add new configurations or edit existing ones.
 	"configurations": [
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Debug Printer",
-			"program": "${file}",
-			"args": [
-				"e:\\Tmp\\0.0.7_test\\stsconfig.json",
-				"./index.js",
-				"..\\story output.txt"
-			]
-		},
-		
     {
 			"name": "Launch Client",
 			"type": "extensionHost",
@@ -47,6 +35,17 @@
       "stopOnEntry": false,
       "sourceMaps": false,
       "program": "${workspaceFolder}/tasks/compile-readme.js"
-    }
+    },
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Debug Printer",
+			"program": "${file}",
+			"args": [
+				"${workspaceRoot}/stsconfig.json",
+				"./index.js",
+				"..\\story output.txt"
+			]
+		}
 	]
 }
