@@ -19,9 +19,9 @@
 	],
 	"activationEvents": [
 		"onLanguage:storytailor",
-		"onCommand:extension.stsCompile",
-		"onCommand:extension.initExampleProject",
-		"onCommand:extension.updateNodeModules"
+		"onCommand:storytailor.stsCompile",
+		"onCommand:storytailor.initExampleProject",
+		"onCommand:storytailor.updateNodeModules"
 	],
 	"main": "./out/src/extension",
 	"icon": "logo.png",
@@ -84,32 +84,32 @@
 		"themes": [],
 		"commands": [
 			{
-				"command": "extension.stsCompile",
+				"command": "storytailor.stsCompile",
 				"title": "Storytailor: Compile Storytailor",
 				"category": "Compile"
 			},
 			{
-				"command": "extension.stsCompileAndPreview",
+				"command": "storytailor.stsCompileAndPreview",
 				"title": "Storytailor: Compile and show preview",
 				"category": "Compile"
 			},
 			{
-				"command": "extension.previewStorytailor",
+				"command": "storytailor.previewStorytailor",
 				"title": "Storytailor: Preview storytailor module"
 			},
 			{
-				"command": "extension.initExampleProject",
+				"command": "storytailor.initExampleProject",
 				"title": "Storytailor: Initialize example storytailor project in a working root",
 				"category": "Initialize"
 			},
 			{
-				"command": "extension.updateNodeModules",
+				"command": "storytailor.updateNodeModules",
 				"title": "Storytailor: Rewrite Storytailor npm modules with extension's one"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "extension.previewStorytailor",
+				"command": "storytailor.previewStorytailor",
 				"when": "resourceLangId == storytailor",
 				"key": "Ctrl+Shift+Alt+p"
 			}
@@ -123,7 +123,7 @@
 		"menus": {
 			"explorer/context": [
 				{
-					"command": "extension.initExampleProject"
+					"command": "storytailor.initExampleProject"
 				}
 			]
 		}

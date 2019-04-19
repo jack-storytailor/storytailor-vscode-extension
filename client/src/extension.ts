@@ -45,7 +45,7 @@ let diagnosicCollection: vscode.DiagnosticCollection = undefined;
 const initShowPreview = (context: vscode.ExtensionContext) => {
   // initStorytailorWebviewPanel();
   
-  let disposable = vscode.commands.registerCommand('extension.previewStorytailor', () => {
+  let disposable = vscode.commands.registerCommand('storytailor.previewStorytailor', () => {
     storytailorPreviewPanel.reveal(vscode.ViewColumn.Two, true);
   });
   context.subscriptions.push(disposable);
@@ -115,7 +115,7 @@ const stsCompileAndPreview = () => {
   storytailorPreviewPanel.webview.html = getStorytailorPreviewHtml();
 
   // textDocProvider.update(previewUri);
-  vscode.commands.executeCommand('extension.previewStorytailor').then((success) => { }, (reason) => { vscode.window.showErrorMessage(reason); });
+  vscode.commands.executeCommand('storytailor.previewStorytailor').then((success) => { }, (reason) => { vscode.window.showErrorMessage(reason); });
 }
 
 const stringFormat = function(template: string): string {
@@ -301,12 +301,12 @@ const insertText = (text: string, isMoveCursor: boolean) => {
 }
 
 const initCommands = (context: ExtensionContext) => {
-  vscode.commands.registerCommand('extension.updateNodeModules', updateNodeModules);
-  vscode.commands.registerCommand('extension.initExampleProject', initExampleProject);
+  vscode.commands.registerCommand('storytailor.updateNodeModules', updateNodeModules);
+  vscode.commands.registerCommand('storytailor.initExampleProject', initExampleProject);
 }
 
 const initStsCompileCommand = (context: ExtensionContext) => {
-  context.subscriptions.push(vscode.commands.registerCommand('extension.stsCompile', () => {
+  context.subscriptions.push(vscode.commands.registerCommand('storytailor.stsCompile', () => {
   
     try {
       stsCompile();
@@ -318,7 +318,7 @@ const initStsCompileCommand = (context: ExtensionContext) => {
   }));
 }
 const initStsCompileAndPreviewCommand = (context: ExtensionContext) => {
-  context.subscriptions.push(vscode.commands.registerCommand('extension.stsCompileAndPreview', () => {
+  context.subscriptions.push(vscode.commands.registerCommand('storytailor.stsCompileAndPreview', () => {
   
     try {
       stsCompileAndPreview();
@@ -333,29 +333,29 @@ const initStsCompileAndPreviewCommand = (context: ExtensionContext) => {
 const initInsertTextCommands = (context: ExtensionContext) => {
   // let insertCommands: {command: string, text: string, isMoveCursor?: boolean}[] = [
   //   {
-  //     command: 'extension.sts_insert_{',
+  //     command: 'storytailor.sts_insert_{',
   //     text: '{}',
   //     isMoveCursor: true,
   //   },
   //   {
-  //     command: 'extension.sts_insert_}',
+  //     command: 'storytailor.sts_insert_}',
   //     text: '}'
   //   },
   //   {
-  //     command: 'extension.sts_insert_[',
+  //     command: 'storytailor.sts_insert_[',
   //     isMoveCursor: true,
   //     text: '[]'
   //   },
   //   {
-  //     command: 'extension.sts_insert_]',
+  //     command: 'storytailor.sts_insert_]',
   //     text: ']'
   //   },
   //   {
-  //     command: 'extension.sts_insert_>>',
+  //     command: 'storytailor.sts_insert_>>',
   //     text: '>>'
   //   },
   //   {
-  //     command: 'extension.sts_insert_<<',
+  //     command: 'storytailor.sts_insert_<<',
   //     text: '<<'
   //   },
   // ]
