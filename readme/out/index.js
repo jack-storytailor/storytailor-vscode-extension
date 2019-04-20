@@ -1,10 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-let __env = require(`./environment`);
+let __env = require(`\.\.\\src/environment`);
 let __context = { __text: [] };
 let __serializer = __env.getSerializer();
-__context['system'] = require('./system');
-__context = Object.assign({}, __context, __context['system'], { __text: __context['__text'] });
+
+__context['system'] = require(`./system`);
+	__context = {
+...__context, 
+...__context['system'], 
+__text : __context['__text']
+};
 ;
 __context['__text'] = [...__context['__text'], `# storytailor-vscode`];
 ;
@@ -16,7 +19,7 @@ __context['__text'] = [...__context['__text'], `note that this is an experimenta
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['hyperlink'](`https:\//github.com/freewebtime/storyscriptOrigins/blob/master/Instruction.md`, `Storytailor instruction (rus)`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['hyperlink'](`https://github.com/jack-storytailor/StorytailorOrigins/blob/master/Instruction.md`, `Storytailor instruction (rus)`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -36,7 +39,7 @@ __context['__text'] = [...__context['__text'], `Open empty folder`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`vscode_empty.png`, `Empty folder`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`vscode_empty.png`, `Empty folder`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -44,7 +47,7 @@ __context['__text'] = [...__context['__text'], `Right-click on your project root
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`init_example_project.png`, `init example project`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`init_example_project.png`, `init example project`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -56,7 +59,7 @@ __context['__text'] = [...__context['__text'], `Confirm copying`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`confirm_init_example_project.png`, `Confirm copying`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`confirm_init_example_project.png`, `Confirm copying`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -64,7 +67,7 @@ __context['__text'] = [...__context['__text'], `Test project has been copied to 
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`example_project_created.png`, `example prject created`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`example_project_created.png`, `example prject created`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -76,7 +79,7 @@ __context['__text'] = [...__context['__text'], `Open terminal`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`open_terminal.png`, `open terminal`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`open_terminal.png`, `open terminal`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -84,7 +87,7 @@ __context['__text'] = [...__context['__text'], `Type command "npm install" or "n
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`npm_install.png`, `npm install in terminal`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`npm_install.png`, `npm install in terminal`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -92,7 +95,7 @@ __context['__text'] = [...__context['__text'], `Node modules are installed`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`node_modules_created.png`, `node modules are installed`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`node_modules_created.png`, `node modules are installed`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -100,7 +103,7 @@ __context['__text'] = [...__context['__text'], `Now you can close terminal`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`close_terminal.png`, `Close terminal`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`close_terminal.png`, `Close terminal`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -108,7 +111,7 @@ __context['__text'] = [...__context['__text'], `Source files are in projectRoot/
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`story_source_files.png`, `исходники истории`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`story_source_files.png`, `исходники истории`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -126,11 +129,11 @@ __context['__text'] = [...__context['__text'], `Open Command Palette (Menu View 
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`command_palette.png`, `command palette`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`command_palette.png`, `command palette`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`command_palette_openned.png`, `command palette openned`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`command_palette_openned.png`, `command palette openned`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -138,7 +141,7 @@ __context['__text'] = [...__context['__text'], `Choose command "Compile: Compile
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`compile_and_show_preview.png`, `compile and show preview`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`compile_and_show_preview.png`, `compile and show preview`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -148,7 +151,7 @@ __context['__text'] = [...__context['__text'], `typescript files compiled to jav
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`compiled_story.png`, `compiled story`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`compiled_story.png`, `compiled story`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -156,7 +159,7 @@ __context['__text'] = [...__context['__text'], `When story build is done, storyt
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`preview_story.png`, `Preview story`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`preview_story.png`, `Preview story`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -164,11 +167,11 @@ __context['__text'] = [...__context['__text'], `Preview window can be placed as 
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`layout_2.png`, `layout variant 2`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`layout_2.png`, `layout variant 2`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`layout_3.png`, `layout variant 3`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`layout_3.png`, `layout variant 3`), '\r\n' )}`];
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
@@ -176,9 +179,9 @@ __context['__text'] = [...__context['__text'], `Text that is shown in preview wi
 ;
 __context['__text'] = [...__context['__text'], ``];
 ;
-__context['__text'] = [...__context['__text'], `${__serializer.serialize(__context['localPhoto'](`story_output.png`, `story output`), '\r\n')}`];
+__context['__text'] = [...__context['__text'], `${__serializer.serialize( __context['localPhoto'](`story_output.png`, `story output`), '\r\n' )}`];
 ;
+
+
 // INFO: this trick is for making this file node module
-exports.default = __context;
-module.exports = Object.assign({}, __context);
-//# sourceMappingURL=index.js.map
+module.exports = __context;
