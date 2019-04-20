@@ -1,0 +1,31 @@
+// import declarations
+* import * as chapter1 from './lib/chapter1'
+* import * as chapter2 from './lib/chapter2'
+* import * as characters from './lib/characters'
+
+// one line after import declaration can be skipped and it won't be in a final text
+The example story
+
+// let's type content of a chapter1 module
+*chapter1; // semicolon after expression will be skipped
+
+// ...and chapter2
+*chapter2;
+
+-------------------------------- // just line of dashes
+// module characters contain two fields: 'main hero' and villan. 
+// let's reference 'main hero'
+And here is our winner: *characters.Protagonist;
+
+--------------------------------
+and here how you can call functions.
+let's reference module storytailor/out/environment from node_modules
+* import * as environment2 from 'storytailor/out/environment'
+
+this module (*environment2.toString();) contains testFunction(param1, param2) that can be called from mention:
+
+The result of the function call is
+Expected:
+  param1: Main hero, param2: Super-Villan
+Actual
+  *environment2.testFunction(characters.Protagonist, characters.Villan);

@@ -195,11 +195,27 @@ const getStorytailorPreviewText = () => {
 };
 const initExampleProject = () => {
     // INSERT CONFIRMATION
-    vscode.window.showWarningMessage(`This action will copy example project to your root folder.
-    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`, `Yes`, `No`).then((val) => {
+    vscode.window.showWarningMessage(`Simple setup.
+    This action will copy example project to your root folder.
+    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`, `Yes`, `No`)
+        .then((val) => {
         if (val && val === `Yes`) {
             let targetPath = path.normalize(vscode.workspace.rootPath);
             let sourcePath = path.normalize(__dirname + '/../../lib/example-project');
+            fsUtils.mkDirByPathSync(targetPath);
+            fsUtils.copyDirectory(sourcePath, targetPath);
+        }
+    });
+};
+const initExampleProjectWebpack = () => {
+    // INSERT CONFIRMATION
+    vscode.window.showWarningMessage(`Webpack setup.
+    This action will copy example project to your root folder.
+    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`, `Yes`, `No`)
+        .then((val) => {
+        if (val && val === `Yes`) {
+            let targetPath = path.normalize(vscode.workspace.rootPath);
+            let sourcePath = path.normalize(__dirname + '/../../lib/example-project-webpack');
             fsUtils.mkDirByPathSync(targetPath);
             fsUtils.copyDirectory(sourcePath, targetPath);
         }
@@ -233,6 +249,7 @@ const insertText = (text, isMoveCursor) => {
 const initCommands = (context) => {
     vscode.commands.registerCommand('storytailor.updateNodeModules', updateNodeModules);
     vscode.commands.registerCommand('storytailor.initExampleProject', initExampleProject);
+    vscode.commands.registerCommand('storytailor.initExampleProjectWebpack', initExampleProject);
 };
 const initStsCompileCommand = (context) => {
     context.subscriptions.push(vscode.commands.registerCommand('storytailor.stsCompile', () => {

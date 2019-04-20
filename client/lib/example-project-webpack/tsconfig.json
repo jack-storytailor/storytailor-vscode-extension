@@ -3,22 +3,21 @@
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"noImplicitAny": false,
-		"noImplicitReturns": true,		
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
 		"target": "es6",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"lib": [ "es2016" ],
     "sourceMap": true,
-    "allowJs": false,
+		"allowJs": false,
+		"jsx": "react",
 
-		"rootDir": ".",
-		"outDir": "./out"
+		"rootDir": "./tsrc",
+		"outDir": "./tsrc"
   },
 	"exclude": [
 		"node_modules",
-    "server",
-    "out",
-    "example-project",
-    "lib"
+    "out"
 	]
 }

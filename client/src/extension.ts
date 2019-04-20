@@ -247,11 +247,13 @@ const getStorytailorPreviewText = (): string => {
 const initExampleProject = () => {
   // INSERT CONFIRMATION
   vscode.window.showWarningMessage(
-    `This action will copy example project to your root folder.
+    `Simple setup.
+    This action will copy example project to your root folder.
     Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`,
     `Yes`,
     `No`
-  ).then((val: string) => {
+  )
+  .then((val: string) => {
     if (val && val === `Yes`) {
 
       let targetPath = path.normalize(vscode.workspace.rootPath);
@@ -262,7 +264,27 @@ const initExampleProject = () => {
 
     }
   });
+}
+const initExampleProjectWebpack = () => {
+  // INSERT CONFIRMATION
+  vscode.window.showWarningMessage(
+    `Webpack setup.
+    This action will copy example project to your root folder.
+    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`,
+    `Yes`,
+    `No`
+  )
+  .then((val: string) => {
+    if (val && val === `Yes`) {
 
+      let targetPath = path.normalize(vscode.workspace.rootPath);
+      let sourcePath = path.normalize(__dirname + '/../../lib/example-project-webpack');
+    
+      fsUtils.mkDirByPathSync(targetPath);
+      fsUtils.copyDirectory(sourcePath, targetPath);
+
+    }
+  });
 }
 
 const updateNodeModules = () => {
@@ -303,6 +325,7 @@ const insertText = (text: string, isMoveCursor: boolean) => {
 const initCommands = (context: ExtensionContext) => {
   vscode.commands.registerCommand('storytailor.updateNodeModules', updateNodeModules);
   vscode.commands.registerCommand('storytailor.initExampleProject', initExampleProject);
+  vscode.commands.registerCommand('storytailor.initExampleProjectWebpack', initExampleProject);
 }
 
 const initStsCompileCommand = (context: ExtensionContext) => {

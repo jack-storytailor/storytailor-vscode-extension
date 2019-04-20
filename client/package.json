@@ -4,7 +4,7 @@
 	"description": "Adds Storytailor programming language support to vscode",
 	"author": "jack.storytailor",
 	"license": "MIT",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"publisher": "jackstorytailor",
 	"repository": {
 		"type": "git",
@@ -99,7 +99,12 @@
 			},
 			{
 				"command": "storytailor.initExampleProject",
-				"title": "Storytailor: Initialize example storytailor project in a working root",
+				"title": "Storytailor: Initialize example storytailor project in a working root (Simple setup)",
+				"category": "Initialize"
+			},
+			{
+				"command": "storytailor.initExampleProjectWebpack",
+				"title": "Storytailor: Initialize example storytailor project in a working root (Webpack setup)",
 				"category": "Initialize"
 			},
 			{
