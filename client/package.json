@@ -21,6 +21,7 @@
 		"onLanguage:storytailor",
 		"onCommand:storytailor.stsCompile",
 		"onCommand:storytailor.initExampleProject",
+		"onCommand:storytailor.initExampleProjectWebpack",
 		"onCommand:storytailor.updateNodeModules"
 	],
 	"main": "./out/src/extension",
