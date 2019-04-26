@@ -249,7 +249,7 @@ const insertText = (text, isMoveCursor) => {
 const initCommands = (context) => {
     vscode.commands.registerCommand('storytailor.updateNodeModules', updateNodeModules);
     vscode.commands.registerCommand('storytailor.initExampleProject', initExampleProject);
-    vscode.commands.registerCommand('storytailor.initExampleProjectWebpack', initExampleProject);
+    vscode.commands.registerCommand('storytailor.initExampleProjectWebpack', initExampleProjectWebpack);
 };
 const initStsCompileCommand = (context) => {
     context.subscriptions.push(vscode.commands.registerCommand('storytailor.stsCompile', () => {
