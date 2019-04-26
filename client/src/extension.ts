@@ -325,7 +325,7 @@ const insertText = (text: string, isMoveCursor: boolean) => {
 const initCommands = (context: ExtensionContext) => {
   vscode.commands.registerCommand('storytailor.updateNodeModules', updateNodeModules);
   vscode.commands.registerCommand('storytailor.initExampleProject', initExampleProject);
-  vscode.commands.registerCommand('storytailor.initExampleProjectWebpack', initExampleProject);
+  vscode.commands.registerCommand('storytailor.initExampleProjectWebpack', initExampleProjectWebpack);
 }
 
 const initStsCompileCommand = (context: ExtensionContext) => {
