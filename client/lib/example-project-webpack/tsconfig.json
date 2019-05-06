@@ -13,8 +13,8 @@
 		"allowJs": false,
 		"jsx": "react",
 
-		"rootDir": "./tsrc",
-		"outDir": "./tsrc"
+		"rootDir": "./src",
+		"outDir": "./src"
   },
 	"exclude": [
 		"node_modules",

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const loaderUtils = require("loader-utils");
 const storytailor = require("storytailor/out");
 const jsCompiler = require("storytailor/out/compilation/jsCompiler");
-const astParser = require("storytailor/out/parsing/astParser2");
+const astParser = require("storytailor/out/parsing/astParser");
 function default_1(source) {
     try {
         const loaderContext = this;

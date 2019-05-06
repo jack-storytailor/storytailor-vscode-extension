@@ -12,10 +12,8 @@ import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind, Di
 import * as fsUtils from 'storytailor/out/fileSystem/fsUtils';
 import * as compileUtils from 'storytailor/out/compilation/compileUtils';
 import { ICompileRequest } from 'storytailor/out/shared/ICompileRequest';
-import { ICompileError } from 'storytailor/out/shared/ICompileError';
 import { ICompilerState } from 'storytailor/out/shared/ICompilerState';
 import { IDiagnostic } from 'storytailor/out/shared/IParsingError';
-import { encode } from 'punycode';
 
 let storytailorPreviewPanel: vscode.WebviewPanel = undefined; 
 let storytailorPreviewHtmlTemplate: string = undefined;

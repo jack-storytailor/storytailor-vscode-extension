@@ -2,7 +2,7 @@ import * as loaderUtils from "loader-utils";
 import * as webpack from "webpack";
 import * as storytailor from "storytailor/out";
 import * as jsCompiler from 'storytailor/out/compilation/jsCompiler';
-import * as astParser from 'storytailor/out/parsing/astParser2';
+import * as astParser from 'storytailor/out/parsing/astParser';
 
 export default function(this: webpack.loader.LoaderContext, source: string): string {
   try {
