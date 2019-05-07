@@ -2,6 +2,14 @@
 	"version": "0.2.0",
 	// List of configurations. Add new configurations or edit existing ones.
 	"configurations": [
+		{
+			"name": "launch current file",
+			"type": "node",
+			"request": "launch",
+			"sourceMaps": false,
+			"program": "${file}"
+		},
+		
     {
 			"name": "Launch Client",
 			"type": "extensionHost",
