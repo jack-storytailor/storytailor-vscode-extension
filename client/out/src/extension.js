@@ -170,7 +170,7 @@ const getStorytailorPreviewText = () => {
         let workspaceFolder = vscode.workspace.rootPath;
         let configFileName = compileResult.request.configPath || workspaceFolder + '/' + settings.storytailorConfigPath;
         configFileName = path.normalize(configFileName);
-        let outputFileName = workspaceFolder + '/story output.txt';
+        let outputFileName = workspaceFolder + '/story_output.txt';
         if (fileName.endsWith('.sts')) {
             try {
                 // execute 'storytailor/out/index.js workspaceFolder fileName configFileName outputFileName
