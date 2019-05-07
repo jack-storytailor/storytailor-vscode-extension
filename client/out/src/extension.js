@@ -55,7 +55,7 @@ const stsCompile = () => {
                     for (let k = 0; k < fileDiagnostics.length; k++) {
                         const fDiag = fileDiagnostics[k];
                         let fDiagStart = fDiag.range.start || { line: 0, column: 0, symbol: 0 };
-                        let fDiagEnd = fDiag.range.start || { line: 0, column: 0, symbol: 0 };
+                        let fDiagEnd = fDiag.range.end || { line: 0, column: 0, symbol: 0 };
                         let fDiagRange = new vscode.Range(new vscode.Position(fDiagStart.line, fDiagStart.column), new vscode.Position(fDiagEnd.line, fDiagEnd.column));
                         let diag = new vscode.Diagnostic(fDiagRange, fDiag.message, fDiag.severity);
                         diagnostics = [
