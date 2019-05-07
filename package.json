@@ -25,7 +25,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "regexpu": "^4.5.2",
-    "storytailor": "^0.0.7"
+    "storytailor": "^0.0.8"
   },
   "dependencies": {
     "@types/node": "^11.12.0",

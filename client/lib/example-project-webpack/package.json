@@ -6,7 +6,7 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "storytailor": "^0.0.7"
+    "storytailor": "^0.0.8"
   },
   "devDependencies": {
     "@types/loader-utils": "^1.1.3",

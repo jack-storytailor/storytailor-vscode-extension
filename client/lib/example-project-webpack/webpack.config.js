@@ -7,7 +7,7 @@ const stsConfigPath = "stsconfig.json";
 const stsConfig = configUtils.loadConfig(stsConfigPath);
 
 module.exports = {
-  entry: "./tsrc/index.js",
+  entry: "./src/index.js",
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "out"),
@@ -37,7 +37,7 @@ module.exports = {
         test: /\.sts$/,
         use: [
           {
-            loader: path.resolve('./tsrc/stsLoader.js'),
+            loader: path.resolve('./src/stsLoader.js'),
             options: {
               stsConfig: stsConfig
             }
