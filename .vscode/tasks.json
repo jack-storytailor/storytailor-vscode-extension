@@ -53,6 +53,12 @@
       "script": "compile:client",
       "group": "build",
       "problemMatcher": ["$tsc"]
+    },
+
+
+    {
+      "label": "update:npm packages",
+      
     }
 
   ]

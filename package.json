@@ -11,6 +11,8 @@
   },
   "scripts": {
     "update:all": "npm update && cd server && npm update && cd ../client && npm update",
+    "update:all:ncu": "ncu -u && npm i && cd server && ncu -u && npm i && cd ../client && ncu -u && npm i && cd ../readme && ncu -u && npm i && cd ../storytailor && ncu -u && npm i",
+    "update:examples:ncu": "cd client/lib/example-project && ncu -u && cd ../example-project-webpack && ncu -u",
     "postinstall": "cd server && npm install && cd ../client && npm install && cd .. && cd readme && npm install && cd .. && cd storytailor && npm install && cd ..",
     "install:server": "cd server && npm run installServer && cd ..",
     "compile:all": "node tasks/compile.js",
@@ -22,9 +24,10 @@
     "compile:readme": "node tasks/compile-readme.js"
   },
   "devDependencies": {
-    "@types/node": "^11.13.15",
-    "storytailor": "^0.0.8",
-    "typescript": "^3.5.2"
+    "@types/node": "^12.0.12",
+    "storytailor": "^0.0.9",
+    "typescript": "^3.5.2",
+    "npm-check-updates": "^3.1.14"
   },
   "dependencies": {},
   "bugs": {
