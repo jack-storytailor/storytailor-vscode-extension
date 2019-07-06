@@ -60,13 +60,15 @@
       "label": "update:npm packages",
       "type": "npm",
       "script": "update:all:ncu",
-      "group": "build"
+      "group": "build",
+      "problemMatcher": ["$tsc"]
     },
     {
       "label": "update:npm dependencies in example projects",
       "type": "npm",
       "script": "update:examples:ncu",
-      "group": "build"
+      "group": "build",
+      "problemMatcher": ["$tsc"]
     },
 
   ]
