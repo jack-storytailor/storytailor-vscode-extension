@@ -58,8 +58,16 @@
 
     {
       "label": "update:npm packages",
-      
-    }
+      "type": "npm",
+      "script": "update:all:ncu",
+      "group": "build"
+    },
+    {
+      "label": "update:npm dependencies in example projects",
+      "type": "npm",
+      "script": "update:examples:ncu",
+      "group": "build"
+    },
 
   ]
 }
