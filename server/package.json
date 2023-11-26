@@ -1,15 +1,15 @@
 {
   "name": "storytailor-languageserver",
   "description": "Example implementation of a language server in node.",
-  "version": "0.0.1",
-  "author": "Microsoft Corporation",
+  "version": "0.0.2",
+  "author": "jack.storytailor",
   "license": "MIT",
   "engines": {
     "node": "*"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/vscode-extension-samples"
+    "url": ""
   },
   "dependencies": {
     "storytailor": "^0.0.10",

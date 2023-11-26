@@ -3,7 +3,7 @@
   "description": "plugin for vs code that adds support for storytailor programming language",
   "author": "Jack Storytailor",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "jack.storytailor",
   "repository": {
     "type": "git",
