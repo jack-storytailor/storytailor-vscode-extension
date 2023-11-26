@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	// List of configurations. Add new configurations or edit existing ones.
 	"configurations": [
-    {
+		{
 			"name": "Launch Client",
 			"type": "extensionHost",
 			"request": "launch",
@@ -14,28 +14,28 @@
 			"sourceMaps": true,
 			"outFiles": [
 				"${workspaceRoot}/client/out/**/*.js"
-      ],
-      "preLaunchTask": "compile"
+			],
+			"preLaunchTask": "compile"
 		},
 		{
 			"name": "Attach to Server",
 			"type": "node",
-      "request": "attach",
-      "stopOnEntry": false,
+			"request": "attach",
+			"stopOnEntry": false,
 			"port": 6009,
 			"sourceMaps": true,
 			"outFiles": [
 				"${workspaceRoot}/client/server/**/*.js"
 			]
-    },
-    {
-      "name": "Debug Readme compilation",
-      "type": "node",
-      "request": "launch",
-      "stopOnEntry": false,
-      "sourceMaps": false,
-      "program": "${workspaceFolder}/tasks/compile-readme.js"
-    },
+		},
+		{
+			"name": "Debug Readme compilation",
+			"type": "node",
+			"request": "launch",
+			"stopOnEntry": false,
+			"sourceMaps": false,
+			"program": "${workspaceFolder}/tasks/compile-readme.js"
+		},
 		{
 			"type": "node",
 			"request": "launch",

@@ -15,7 +15,7 @@ import { ICompileRequest } from 'storytailor/out/shared/ICompileRequest';
 import { ICompilerState } from 'storytailor/out/shared/ICompilerState';
 import { IDiagnostic } from 'storytailor/out/shared/IParsingError';
 
-let storytailorPreviewPanel: vscode.WebviewPanel = undefined; 
+let storytailorPreviewPanel: vscode.WebviewPanel = undefined;
 let storytailorPreviewHtmlTemplate: string = undefined;
 
 enum configFields {
@@ -35,22 +35,49 @@ let defaultSettings: IStsSettings = {
   typescriptConfigPath: 'tsconfig.json',
   previewHtmlTemplatePath: undefined,
 }
-let settings = {...defaultSettings};
+let settings = { ...defaultSettings };
 
 let extensionContext: vscode.ExtensionContext = undefined;
 let diagnosicCollection: vscode.DiagnosticCollection = undefined;
 
 const initShowPreview = (context: vscode.ExtensionContext) => {
   // initStorytailorWebviewPanel();
-  
+
   let disposable = vscode.commands.registerCommand('storytailor.previewStorytailor', () => {
     storytailorPreviewPanel.reveal(vscode.ViewColumn.Two, true);
   });
   context.subscriptions.push(disposable);
 }
 
-const stsCompile = () => {
-  let configPath = path.resolve(vscode.workspace.rootPath, settings.storytailorConfigPath);
+const getRootFolderForActiveEditor = () => {
+  let activeTextEditor = vscode.window.activeTextEditor;
+  if (activeTextEditor && activeTextEditor.document) {
+    let wpF = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(activeTextEditor.document.fileName));
+    if (wpF && wpF.uri) {
+      let workspaceFolder = wpF.uri.path;
+      return workspaceFolder;
+    }
+  }
+
+  return undefined;
+}
+
+const stsCompile = (workspaceFolder?) => {
+  if (!workspaceFolder) {
+    workspaceFolder = getRootFolderForActiveEditor();
+    if (!workspaceFolder) {
+      let folders = vscode.workspace.workspaceFolders;
+      if (folders && folders.length > 0) {
+        workspaceFolder = folders[0].uri.path;
+      }
+    }
+    }
+  
+  if (!workspaceFolder) {
+    return undefined;
+  }
+
+  let configPath = path.resolve(workspaceFolder, settings.storytailorConfigPath);
   console.log('sts config path', configPath);
   let compileRequest: ICompileRequest = {
     configPath: configPath,
@@ -73,8 +100,8 @@ const stsCompile = () => {
 
           for (let k = 0; k < fileDiagnostics.length; k++) {
             const fDiag = fileDiagnostics[k];
-            let fDiagStart = fDiag.range.start || {line: 0, column: 0, symbol: 0};
-            let fDiagEnd = fDiag.range.end || {line: 0, column: 0, symbol: 0};
+            let fDiagStart = fDiag.range.start || { line: 0, column: 0, symbol: 0 };
+            let fDiagEnd = fDiag.range.end || { line: 0, column: 0, symbol: 0 };
             let fDiagRange: vscode.Range = new vscode.Range(
               new vscode.Position(fDiagStart.line, fDiagStart.column),
               new vscode.Position(fDiagEnd.line, fDiagEnd.column)
@@ -82,7 +109,7 @@ const stsCompile = () => {
             let diag: vscode.Diagnostic = new vscode.Diagnostic(
               fDiagRange,
               fDiag.message,
-              fDiag.severity as DiagnosticSeverity
+              fDiag.severity as number
             );
 
             diagnostics = [
@@ -116,17 +143,17 @@ const stsCompileAndPreview = () => {
   vscode.commands.executeCommand('storytailor.previewStorytailor').then((success) => { }, (reason) => { vscode.window.showErrorMessage(reason); });
 }
 
-const stringFormat = function(template: string): string {
+const stringFormat = function (template: string): string {
   var args = arguments;
   if (!template || !args || args.length === 0) {
     return template;
   }
 
-  return template.replace(/{(\d+)}/g, function(match, number) { 
+  return template.replace(/{(\d+)}/g, function (match, number) {
     return typeof args[number] != 'undefined'
       ? args[number]
       : match
-    ;
+      ;
   });
 };
 
@@ -139,8 +166,9 @@ const getPreviewHtmlTemplate = (): string => {
       if (storytailorPreviewHtmlTemplate && storytailorPreviewHtmlTemplate.length > 0) {
         return storytailorPreviewHtmlTemplate;
       }
-      
-      templatePath = path.resolve(vscode.workspace.rootPath, templatePath);
+
+      var rootFolderPath = getRootFolderForActiveEditor();
+      templatePath = path.resolve(rootFolderPath, templatePath);
       if (fs.existsSync(templatePath)) {
         let template = fs.readFileSync(templatePath, 'utf8').toString();
         return template;
@@ -180,7 +208,7 @@ const getStorytailorPreviewHtml = (): string => {
       .replace(/\$\{title\}/, title)
       .replace(/\$\{documentContent\}/, documentContent);
 
-    console.log(html);
+    // console.log(html);
     return html;
   } catch (error) {
     console.error(error);
@@ -214,7 +242,7 @@ const getStorytailorPreviewText = (): string => {
   let activeTextEditor = vscode.window.activeTextEditor;
   if (activeTextEditor) {
     let fileName = activeTextEditor.document.fileName;
-    let workspaceFolder = vscode.workspace.rootPath;
+    let workspaceFolder = getRootFolderForActiveEditor();
     let configFileName = compileResult.request.configPath || workspaceFolder + '/' + settings.storytailorConfigPath;
     configFileName = path.normalize(configFileName);
     let outputFileName = workspaceFolder + '/story_output.txt';
@@ -244,49 +272,78 @@ const getStorytailorPreviewText = (): string => {
 
 const initExampleProject = () => {
   // INSERT CONFIRMATION
-  vscode.window.showWarningMessage(
-    `Simple setup.
-    This action will copy example project to your root folder.
-    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`,
-    `Yes`,
-    `No`
-  )
-  .then((val: string) => {
-    if (val && val === `Yes`) {
-
-      let targetPath = path.normalize(vscode.workspace.rootPath);
-      let sourcePath = path.normalize(__dirname + '/../../lib/example-project');
-    
-      fsUtils.mkDirByPathSync(targetPath);
-      fsUtils.copyDirectory(sourcePath, targetPath);
-
+  let workspaceFolder = getRootFolderForActiveEditor();
+  if (!workspaceFolder) {
+    let folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length > 0) {
+      workspaceFolder = folders[0].uri.path;
     }
-  });
+  }
+
+  if (workspaceFolder) {
+    vscode.window.showWarningMessage(
+      `Simple setup.
+      This action will copy example project to your root folder.
+      Files in folder '${workspaceFolder}' may be overriden. Are you sure?`,
+      `Yes`,
+      `No`
+    ).then((val: string) => {
+      if (val && val === `Yes`) {
+
+        let targetPath = path.normalize(workspaceFolder);
+        let sourcePath = path.normalize(__dirname + '/../../lib/example-project');
+
+        fsUtils.mkDirByPathSync(targetPath);
+        fsUtils.copyDirectory(sourcePath, targetPath);
+      }
+    });
+  }
 }
 const initExampleProjectWebpack = () => {
-  // INSERT CONFIRMATION
-  vscode.window.showWarningMessage(
-    `Webpack setup.
-    This action will copy example project to your root folder.
-    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`,
-    `Yes`,
-    `No`
-  )
-  .then((val: string) => {
-    if (val && val === `Yes`) {
-
-      let targetPath = path.normalize(vscode.workspace.rootPath);
-      let sourcePath = path.normalize(__dirname + '/../../lib/example-project-webpack');
-    
-      fsUtils.mkDirByPathSync(targetPath);
-      fsUtils.copyDirectory(sourcePath, targetPath);
-
+  let workspaceFolder = getRootFolderForActiveEditor();
+  if (!workspaceFolder) {
+    let folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length > 0) {
+      workspaceFolder = folders[0].uri.path;
     }
-  });
+  }
+
+  if (workspaceFolder) {
+    // INSERT CONFIRMATION
+    vscode.window.showWarningMessage(
+      `Webpack setup.
+      This action will copy example project to your root folder.
+      Files in folder '${workspaceFolder}' may be overriden. Are you sure?`,
+      `Yes`,
+      `No`
+    ).then((val: string) => {
+      if (val && val === `Yes`) {
+
+        let targetPath = path.normalize(workspaceFolder);
+        let sourcePath = path.normalize(__dirname + '/../../lib/example-project-webpack');
+
+        fsUtils.mkDirByPathSync(targetPath);
+        fsUtils.copyDirectory(sourcePath, targetPath);
+
+      }
+    });
+  }
 }
 
 const updateNodeModules = () => {
-  let targetPath = path.normalize(vscode.workspace.rootPath + '/node_modules/storytailor');
+  let workspaceFolder = getRootFolderForActiveEditor();
+  if (!workspaceFolder) {
+    let folders = vscode.workspace.workspaceFolders;
+    if (folders && folders.length > 0) {
+      workspaceFolder = folders[0].uri.path;
+    }
+  }
+  
+  if (!workspaceFolder) {
+    return;
+  }
+
+  let targetPath = path.normalize(workspaceFolder + '/node_modules/storytailor');
 
   let storytailorPath = require.resolve('storytailor');
 
@@ -300,8 +357,8 @@ const insertText = (text: string, isMoveCursor: boolean) => {
   if (!vscode.window.activeTextEditor) {
     vscode.window.showInformationMessage('Open a file first to manipulate text selections');
     return;
-  }     
-  
+  }
+
   let editor = vscode.window.activeTextEditor;
   let selection = editor.selection;
 
@@ -309,14 +366,14 @@ const insertText = (text: string, isMoveCursor: boolean) => {
     editor.edit(function (edit) {
       edit.insert(selection.start, text);
     })
-    .then((value: boolean) => {
-      if (value && isMoveCursor) {
-        editor.selection = new vscode.Selection(
-          new vscode.Position(selection.start.line, selection.start.character + 1),
-          new vscode.Position(selection.start.line, selection.start.character + 1)
-        )
-      }
-    })
+      .then((value: boolean) => {
+        if (value && isMoveCursor) {
+          editor.selection = new vscode.Selection(
+            new vscode.Position(selection.start.line, selection.start.character + 1),
+            new vscode.Position(selection.start.line, selection.start.character + 1)
+          )
+        }
+      })
   }
 }
 
@@ -328,7 +385,7 @@ const initCommands = (context: ExtensionContext) => {
 
 const initStsCompileCommand = (context: ExtensionContext) => {
   context.subscriptions.push(vscode.commands.registerCommand('storytailor.stsCompile', () => {
-  
+
     try {
       stsCompile();
       vscode.window.showInformationMessage(`storytailor: Compile done`);
@@ -340,7 +397,7 @@ const initStsCompileCommand = (context: ExtensionContext) => {
 }
 const initStsCompileAndPreviewCommand = (context: ExtensionContext) => {
   context.subscriptions.push(vscode.commands.registerCommand('storytailor.stsCompileAndPreview', () => {
-  
+
     try {
       stsCompileAndPreview();
       vscode.window.showInformationMessage(`storytailor: Compile And Preview done`);
@@ -392,36 +449,36 @@ const initInsertTextCommands = (context: ExtensionContext) => {
 }
 
 const initLanguageServer = (context: ExtensionContext) => {
-	// The server is implemented in node
-	let serverModule = context.asAbsolutePath(path.join('server', 'server.js'));
-	// The debug options for the server
-	let debugOptions = { execArgv: ["--nolazy", "--inspect=6009"] };
+  // The server is implemented in node
+  let serverModule = context.asAbsolutePath(path.join('server', 'server.js'));
+  // The debug options for the server
+  let debugOptions = { execArgv: ["--nolazy", "--inspect=6009"] };
 
-	// If the extension is launched in debug mode then the debug server options are used
-	// Otherwise the run options are used
-	let serverOptions: ServerOptions = {
-		run: { module: serverModule, transport: TransportKind.ipc },
-		debug: { module: serverModule, transport: TransportKind.ipc, options: debugOptions }
+  // If the extension is launched in debug mode then the debug server options are used
+  // Otherwise the run options are used
+  let serverOptions: ServerOptions = {
+    run: { module: serverModule, transport: TransportKind.ipc },
+    debug: { module: serverModule, transport: TransportKind.ipc, options: debugOptions }
   }
-  
-	// Options to control the language client
-	let clientOptions: LanguageClientOptions = {
-		// Register the server for plain text documents
-		documentSelector: [{ scheme: 'file', language: 'storytailor' }],
-		synchronize: {
-			// Synchronize the setting section 'languageServerExample' to the server
-			configurationSection: 'storytailor',
-			// Notify the server about file changes to '.clientrc files contain in the workspace
-			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
-		}
-	}
 
-	// Create the language client and start the client.
-	let disposable = new LanguageClient('storytailor', 'storytailor language server', serverOptions, clientOptions).start();
+  // Options to control the language client
+  let clientOptions: LanguageClientOptions = {
+    // Register the server for plain text documents
+    documentSelector: [{ scheme: 'file', language: 'storytailor' }],
+    synchronize: {
+      // Synchronize the setting section 'languageServerExample' to the server
+      configurationSection: 'storytailor',
+      // Notify the server about file changes to '.clientrc files contain in the workspace
+      fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+    }
+  }
 
-	// Push the disposable to the context's subscriptions so that the 
-	// client can be deactivated on extension deactivation
-	context.subscriptions.push(disposable);
+  // Create the language client and start the client.
+  let disposable = new LanguageClient('storytailor', 'storytailor language server', serverOptions, clientOptions).start();
+
+  // Push the disposable to the context's subscriptions so that the 
+  // client can be deactivated on extension deactivation
+  context.subscriptions.push(disposable);
 }
 
 const readConfiguration = () => {
@@ -449,7 +506,7 @@ const readConfiguration = () => {
     };
   }
   else {
-    settings = {...defaultSettings};
+    settings = { ...defaultSettings };
   }
 
   console.log('settings are ', settings);
@@ -457,11 +514,11 @@ const readConfiguration = () => {
 
 function initStorytailorWebviewPanel() {
   storytailorPreviewPanel = vscode.window.createWebviewPanel(
-    'storytailor-preview', 
+    'storytailor-preview',
     'Preview story', {
-      preserveFocus: true,
-      viewColumn: vscode.ViewColumn.Two
-    }, 
+    preserveFocus: true,
+    viewColumn: vscode.ViewColumn.Two
+  },
     {
       enableScripts: false,
     }
@@ -476,7 +533,7 @@ export function activate(context: ExtensionContext) {
   readConfiguration();
   initCommands(context);
   initInsertTextCommands(context);
-	initLanguageServer(context);
+  initLanguageServer(context);
   initStsCompileCommand(context);
   initStsCompileAndPreviewCommand(context);
   initShowPreview(context);

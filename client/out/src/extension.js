@@ -4,6 +4,7 @@
  * ------------------------------------------------------------------------------------------ */
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.activate = void 0;
 const path = require("path");
 const fs = require("fs");
 const vscode = require("vscode");
@@ -34,8 +35,31 @@ const initShowPreview = (context) => {
     });
     context.subscriptions.push(disposable);
 };
-const stsCompile = () => {
-    let configPath = path.resolve(vscode.workspace.rootPath, settings.storytailorConfigPath);
+const getRootFolderForActiveEditor = () => {
+    let activeTextEditor = vscode.window.activeTextEditor;
+    if (activeTextEditor && activeTextEditor.document) {
+        let wpF = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(activeTextEditor.document.fileName));
+        if (wpF && wpF.uri) {
+            let workspaceFolder = wpF.uri.path;
+            return workspaceFolder;
+        }
+    }
+    return undefined;
+};
+const stsCompile = (workspaceFolder) => {
+    if (!workspaceFolder) {
+        workspaceFolder = getRootFolderForActiveEditor();
+        if (!workspaceFolder) {
+            let folders = vscode.workspace.workspaceFolders;
+            if (folders && folders.length > 0) {
+                workspaceFolder = folders[0].uri.path;
+            }
+        }
+    }
+    if (!workspaceFolder) {
+        return undefined;
+    }
+    let configPath = path.resolve(workspaceFolder, settings.storytailorConfigPath);
     console.log('sts config path', configPath);
     let compileRequest = {
         configPath: configPath,
@@ -99,7 +123,8 @@ const getPreviewHtmlTemplate = () => {
             if (storytailorPreviewHtmlTemplate && storytailorPreviewHtmlTemplate.length > 0) {
                 return storytailorPreviewHtmlTemplate;
             }
-            templatePath = path.resolve(vscode.workspace.rootPath, templatePath);
+            var rootFolderPath = getRootFolderForActiveEditor();
+            templatePath = path.resolve(rootFolderPath, templatePath);
             if (fs.existsSync(templatePath)) {
                 let template = fs.readFileSync(templatePath, 'utf8').toString();
                 return template;
@@ -135,7 +160,7 @@ const getStorytailorPreviewHtml = () => {
         let html = template
             .replace(/\$\{title\}/, title)
             .replace(/\$\{documentContent\}/, documentContent);
-        console.log(html);
+        // console.log(html);
         return html;
     }
     catch (error) {
@@ -167,7 +192,7 @@ const getStorytailorPreviewText = () => {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor) {
         let fileName = activeTextEditor.document.fileName;
-        let workspaceFolder = vscode.workspace.rootPath;
+        let workspaceFolder = getRootFolderForActiveEditor();
         let configFileName = compileResult.request.configPath || workspaceFolder + '/' + settings.storytailorConfigPath;
         configFileName = path.normalize(configFileName);
         let outputFileName = workspaceFolder + '/story_output.txt';
@@ -195,34 +220,60 @@ const getStorytailorPreviewText = () => {
 };
 const initExampleProject = () => {
     // INSERT CONFIRMATION
-    vscode.window.showWarningMessage(`Simple setup.
-    This action will copy example project to your root folder.
-    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`, `Yes`, `No`)
-        .then((val) => {
-        if (val && val === `Yes`) {
-            let targetPath = path.normalize(vscode.workspace.rootPath);
-            let sourcePath = path.normalize(__dirname + '/../../lib/example-project');
-            fsUtils.mkDirByPathSync(targetPath);
-            fsUtils.copyDirectory(sourcePath, targetPath);
+    let workspaceFolder = getRootFolderForActiveEditor();
+    if (!workspaceFolder) {
+        let folders = vscode.workspace.workspaceFolders;
+        if (folders && folders.length > 0) {
+            workspaceFolder = folders[0].uri.path;
         }
-    });
+    }
+    if (workspaceFolder) {
+        vscode.window.showWarningMessage(`Simple setup.
+      This action will copy example project to your root folder.
+      Files in folder '${workspaceFolder}' may be overriden. Are you sure?`, `Yes`, `No`).then((val) => {
+            if (val && val === `Yes`) {
+                let targetPath = path.normalize(workspaceFolder);
+                let sourcePath = path.normalize(__dirname + '/../../lib/example-project');
+                fsUtils.mkDirByPathSync(targetPath);
+                fsUtils.copyDirectory(sourcePath, targetPath);
+            }
+        });
+    }
 };
 const initExampleProjectWebpack = () => {
-    // INSERT CONFIRMATION
-    vscode.window.showWarningMessage(`Webpack setup.
-    This action will copy example project to your root folder.
-    Files in folder '${vscode.workspace.rootPath}' may be overriden. Are you sure?`, `Yes`, `No`)
-        .then((val) => {
-        if (val && val === `Yes`) {
-            let targetPath = path.normalize(vscode.workspace.rootPath);
-            let sourcePath = path.normalize(__dirname + '/../../lib/example-project-webpack');
-            fsUtils.mkDirByPathSync(targetPath);
-            fsUtils.copyDirectory(sourcePath, targetPath);
+    let workspaceFolder = getRootFolderForActiveEditor();
+    if (!workspaceFolder) {
+        let folders = vscode.workspace.workspaceFolders;
+        if (folders && folders.length > 0) {
+            workspaceFolder = folders[0].uri.path;
         }
-    });
+    }
+    if (workspaceFolder) {
+        // INSERT CONFIRMATION
+        vscode.window.showWarningMessage(`Webpack setup.
+      This action will copy example project to your root folder.
+      Files in folder '${workspaceFolder}' may be overriden. Are you sure?`, `Yes`, `No`).then((val) => {
+            if (val && val === `Yes`) {
+                let targetPath = path.normalize(workspaceFolder);
+                let sourcePath = path.normalize(__dirname + '/../../lib/example-project-webpack');
+                fsUtils.mkDirByPathSync(targetPath);
+                fsUtils.copyDirectory(sourcePath, targetPath);
+            }
+        });
+    }
 };
 const updateNodeModules = () => {
-    let targetPath = path.normalize(vscode.workspace.rootPath + '/node_modules/storytailor');
+    let workspaceFolder = getRootFolderForActiveEditor();
+    if (!workspaceFolder) {
+        let folders = vscode.workspace.workspaceFolders;
+        if (folders && folders.length > 0) {
+            workspaceFolder = folders[0].uri.path;
+        }
+    }
+    if (!workspaceFolder) {
+        return;
+    }
+    let targetPath = path.normalize(workspaceFolder + '/node_modules/storytailor');
     let storytailorPath = require.resolve('storytailor');
     storytailorPath = path.dirname(storytailorPath);
     fsUtils.mkDirByPathSync(targetPath);

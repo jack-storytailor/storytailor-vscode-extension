@@ -12,7 +12,7 @@ let completions = {};
 let allCompletions = [];
 let timeoutIds = {};
 // Create a connection for the server. The connection uses Node's IPC as a transport
-let connection = vscode_languageserver_1.createConnection(new vscode_languageserver_1.IPCMessageReader(process), new vscode_languageserver_1.IPCMessageWriter(process));
+let connection = (0, vscode_languageserver_1.createConnection)(new vscode_languageserver_1.IPCMessageReader(process), new vscode_languageserver_1.IPCMessageWriter(process));
 // Create a simple text document manager. The text document manager
 // supports full document sync only
 let documents = new vscode_languageserver_1.TextDocuments();
@@ -49,7 +49,7 @@ documents.onDidChangeContent((change) => {
     let docText = change.document.getText();
     // get prev timeout id
     if (timeoutIds[uri]) {
-        timers_1.clearTimeout(timeoutIds[uri]);
+        (0, timers_1.clearTimeout)(timeoutIds[uri]);
     }
     timeoutIds[uri] = setTimeout(updateCompletions, 1000, uri, docText);
 });
@@ -58,7 +58,7 @@ documents.onDidOpen((change) => {
     let docText = change.document.getText();
     // get prev timeout id
     if (timeoutIds[uri]) {
-        timers_1.clearTimeout(timeoutIds[uri]);
+        (0, timers_1.clearTimeout)(timeoutIds[uri]);
     }
     timeoutIds[uri] = setTimeout(updateCompletions, 1000, uri, docText);
 });
@@ -94,7 +94,7 @@ function updateCompletions(uri, docText) {
             };
         });
         // save result
-        completions = Object.assign({}, completions, { [uri]: result });
+        completions = Object.assign(Object.assign({}, completions), { [uri]: result });
     }
     let allWords = [];
     let newCompletions = {};
@@ -109,7 +109,7 @@ function updateCompletions(uri, docText) {
         if (fileWords) {
             allWords = [...allWords, ...fileWords];
         }
-        newCompletions = Object.assign({}, newCompletions, { [fileId]: fileWords });
+        newCompletions = Object.assign(Object.assign({}, newCompletions), { [fileId]: fileWords });
     }
     completions = newCompletions;
     let map = new Map(allWords.map((completion) => {

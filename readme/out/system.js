@@ -1,4 +1,4 @@
-let __env = require(`\.\.\\src/environment`);
+let __env = require(`\.\./src/environment`);
 let __context = { __text: [] };
 let __serializer = __env.getSerializer();
 

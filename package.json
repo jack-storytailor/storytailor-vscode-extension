@@ -24,10 +24,10 @@
     "compile:readme": "node tasks/compile-readme.js"
   },
   "devDependencies": {
-    "@types/node": "^12.0.12",
+    "@types/node": "^20.10.0",
     "storytailor": "^0.0.10",
-    "typescript": "^3.5.2",
-    "npm-check-updates": "^3.1.14"
+    "typescript": "^5.3.2",
+    "npm-check-updates": "^16.14.11"
   },
   "dependencies": {},
   "bugs": {

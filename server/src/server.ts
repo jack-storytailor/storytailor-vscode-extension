@@ -24,7 +24,7 @@ import { clearTimeout } from 'timers';
 
 let completions: { [key: string]: CompletionItem[] } = {}
 let allCompletions: CompletionItem[] = [];
-let timeoutIds: { [key: string]: NodeJS.Timer } = {}
+let timeoutIds: { [key: string]: NodeJS.Timeout } = {}
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
 let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
