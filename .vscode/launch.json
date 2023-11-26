@@ -10,7 +10,6 @@
 			"args": [
 				"--extensionDevelopmentPath=${workspaceRoot}/client"
 			],
-			"stopOnEntry": false,
 			"sourceMaps": true,
 			"outFiles": [
 				"${workspaceRoot}/client/out/**/*.js"
@@ -21,7 +20,6 @@
 			"name": "Attach to Server",
 			"type": "node",
 			"request": "attach",
-			"stopOnEntry": false,
 			"port": 6009,
 			"sourceMaps": true,
 			"outFiles": [
