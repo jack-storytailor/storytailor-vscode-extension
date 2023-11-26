@@ -4,7 +4,7 @@
 	"description": "Adds Storytailor programming language support to vscode",
 	"author": "jack.storytailor",
 	"license": "MIT",
-	"version": "0.0.25",
+	"version": "0.0.26",
 	"publisher": "jackstorytailor",
 	"repository": {
 		"type": "git",
@@ -150,6 +150,6 @@
 	},
 	"devDependencies": {
 		"typescript": "^3.5.2",
-		"vscode": "^1.1.34"
+		"vscode": "^1.1.35"
 	}
 }
