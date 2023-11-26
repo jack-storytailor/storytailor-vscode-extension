@@ -4,6 +4,7 @@
 
   "isEmitJavascript": true,
   "javascriptOutputRoot": "./out",
+  "isEmitSourceMaps": true,
 
   "exclude": [
     ".*/node_modules/.*"

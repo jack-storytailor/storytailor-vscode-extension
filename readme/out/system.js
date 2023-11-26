@@ -14,4 +14,4 @@ return `![${__serializer.serialize( текст, '\r\n' )}](${__serializer.serial
 
 
 // INFO: this trick is for making this file node module
-module.exports = __context;
+Object.assign(module.exports, __context);

@@ -184,4 +184,4 @@ __context['__text'] = [...__context['__text'], `${__serializer.serialize( __cont
 
 
 // INFO: this trick is for making this file node module
-module.exports = __context;
+Object.assign(module.exports, __context);
