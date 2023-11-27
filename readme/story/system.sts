@@ -1,10 +1,10 @@
 * hyperlink = function (@урл, @текст) {
-  return "[*@текст;](*@урл;)";
+	return "[*@текст;](*@урл;)";
 }
 
 * localPhoto = function (@урл, @текст, @imgRoot) {
-  if (!@imgRoot) {
-    @imgRoot = "https:\//raw.githubusercontent.com/jack-storytailor/storytailor-vscode-extension/master/client/lib/images/";
-  }
-  return "![*@текст;](*@imgRoot;*@урл;)";
+	if (!@imgRoot) {
+		@imgRoot = "https:\//raw.githubusercontent.com/jack-storytailor/storytailor-vscode-extension/master/client/lib/images/";
+	}
+	return "![*@текст;](*@imgRoot;*@урл;)";
 }

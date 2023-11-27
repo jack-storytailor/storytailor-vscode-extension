@@ -2,5 +2,8 @@
   "files.exclude": {
     "**/*.js": {"when": "$(basename).ts"},
     "**/*.js.map": true,
-  }
+  },
+  "editor.indentSize": 4,
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false
 }
