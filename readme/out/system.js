@@ -6,7 +6,6 @@ __context['hyperlink'] = function (урл, текст) {
 return `[${__serializer.serialize( текст, '\r\n' )}](${__serializer.serialize( урл, '\r\n' )})`;
 };
 __context['__text'].push(``);
-;
 __context['localPhoto'] = function (урл, текст, imgRoot) {
 if (!imgRoot) { 
 	imgRoot = `https:\//raw.githubusercontent.com/jack-storytailor/storytailor-vscode-extension/master/client/lib/images/`;
