@@ -66,7 +66,7 @@ export const firstLetterUp = (str, separator) => {
 }
 
 export const subitemsToString = (obj, separator, headerTag, headerAttr, contentTag, contentAttr) => {
-  if (obj !== false && !obj) {
+  if (!obj) {
     return undefined;
   }
 
