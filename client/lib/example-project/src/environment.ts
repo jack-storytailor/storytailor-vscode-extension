@@ -11,7 +11,7 @@ export const getSerializer = () => {
         return obj.toString();
       }
 
-      if (!obj) {
+      if (obj !== false && !obj) {
         return undefined;
       }
 
@@ -29,7 +29,7 @@ export const getSerializer = () => {
 }
 
 export const fieldsToString = (obj, separator) => {
-  if (!obj) {
+  if (obj !== false && !obj) {
     return undefined;
   }
 
@@ -66,7 +66,7 @@ export const firstLetterUp = (str, separator) => {
 }
 
 export const subitemsToString = (obj, separator, headerTag, headerAttr, contentTag, contentAttr) => {
-  if (!obj) {
+  if (obj !== false && !obj) {
     return undefined;
   }
 
