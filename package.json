@@ -3,7 +3,7 @@
   "description": "plugin for vs code that adds support for storytailor programming language",
   "author": "Jack Storytailor",
   "license": "MIT",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "publisher": "jack.storytailor",
   "repository": {
     "type": "git",
@@ -21,11 +21,12 @@
     "compile:storytailor.client": "tsc -p storytailor/tsconfig.client.json",
     "compile:client": "tsc -p client/tsconfig.json",
     "compile:server": "cd server && npm run installServer && cd .. && tsc -p server/tsconfig.json",
-    "compile:readme": "node tasks/compile-readme.js"
+    "compile:readme": "node tasks/compile-readme.js",
+	"compile:readme.typescript": "tsc -p readme/tsconfig.json"
   },
   "devDependencies": {
     "@types/node": "^12.0.2",
-    "storytailor": "^0.0.24",
+    "storytailor": "^0.0.26",
     "typescript": "^5.3.2",
     "npm-check-updates": "^16.14.11"
   },

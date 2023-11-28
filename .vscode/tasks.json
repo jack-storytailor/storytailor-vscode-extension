@@ -1,75 +1,95 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "compile",
-      "group": "build",
-      "type": "npm",
-      "script": "compile:all",
-      "problemMatcher": [ "$tsc" ]
-    },
-
-    {
-      "label": "compile:readme",
-      "group": "build",
-      "type": "npm",
-      "script": "compile:readme",
-      "problemMatcher": [ "$tsc" ]
-    },
-    {
-      "label": "compile:storytailor",
-      "group": "build",
-      "type": "npm",
-      "script": "compile:storytailor",
-      "problemMatcher": [
-        "$tsc"
-      ]
-    },
-    {
-      "label": "compile:storytailor.server",
-      "type": "npm",
-      "script": "compile:storytailor.server",
-      "group": "build",
-      "problemMatcher": ["$tsc"]
-    },
-    {
-      "label": "compile:storytailor.client",
-      "type": "npm",
-      "script": "compile:storytailor.client",
-      "group": "build",
-      "problemMatcher": ["$tsc"]
-    },
-
-    {
-      "label": "compile:server",
-      "type": "npm",
-      "script": "compile:server",
-      "group": "build",
-      "problemMatcher": ["$tsc"]
-    },
-    {
-      "label": "compile:client",
-      "type": "npm",
-      "script": "compile:client",
-      "group": "build",
-      "problemMatcher": ["$tsc"]
-    },
-
-
-    {
-      "label": "update:npm packages",
-      "type": "npm",
-      "script": "update:all:ncu",
-      "group": "build",
-      "problemMatcher": ["$tsc"]
-    },
-    {
-      "label": "update:npm dependencies in example projects",
-      "type": "npm",
-      "script": "update:examples:ncu",
-      "group": "build",
-      "problemMatcher": ["$tsc"]
-    },
-
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "compile",
+			"group": "build",
+			"type": "npm",
+			"script": "compile:all",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:readme",
+			"group": "build",
+			"type": "npm",
+			"script": "compile:readme",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:readme.typescript",
+			"group": "build",
+			"type": "npm",
+			"script": "compile:readme.typescript",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:storytailor",
+			"group": "build",
+			"type": "npm",
+			"script": "compile:storytailor",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:storytailor.server",
+			"type": "npm",
+			"script": "compile:storytailor.server",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:storytailor.client",
+			"type": "npm",
+			"script": "compile:storytailor.client",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:server",
+			"type": "npm",
+			"script": "compile:server",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "compile:client",
+			"type": "npm",
+			"script": "compile:client",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "update:npm packages",
+			"type": "npm",
+			"script": "update:all:ncu",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "update:npm dependencies in example projects",
+			"type": "npm",
+			"script": "update:examples:ncu",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+	]
 }
