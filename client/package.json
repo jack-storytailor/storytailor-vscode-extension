@@ -4,8 +4,16 @@
 	"description": "Adds Storytailor programming language support to vscode",
 	"author": "jack.storytailor",
 	"license": "MIT",
-	"version": "0.0.40",
+	"version": "0.0.42",
 	"publisher": "jackstorytailor",
+	"dependencies": {
+		"storytailor": "^0.0.27",
+		"vscode-languageclient": "^5.2.1"
+	},
+	"devDependencies": {
+		"typescript": "^3.5.2",
+		"vscode": "^1.1.35"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/jack-storytailor/storytailor-vscode-extension.git"
@@ -143,13 +151,5 @@
 		"watch": "tsc -w -p ./",
 		"update-vscode": "node ./node_modules/vscode/bin/install",
 		"postinstall": "node ./node_modules/vscode/bin/install"
-	},
-	"dependencies": {
-		"storytailor": "^0.0.26",
-		"vscode-languageclient": "^5.2.1"
-	},
-	"devDependencies": {
-		"typescript": "^3.5.2",
-		"vscode": "^1.1.35"
 	}
 }

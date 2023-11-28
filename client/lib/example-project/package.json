@@ -4,7 +4,7 @@
   "description": "",
   "main": "./index.js",
   "dependencies": {
-    "storytailor": "^0.0.26"
+    "storytailor": "^0.0.27"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

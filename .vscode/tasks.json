@@ -29,6 +29,15 @@
 			]
 		},
 		{
+			"label": "compile:examples.typescript",
+			"group": "build",
+			"type": "npm",
+			"script": "compile:examples.typescript",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
 			"label": "compile:storytailor",
 			"group": "build",
 			"type": "npm",

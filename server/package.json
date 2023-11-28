@@ -1,7 +1,7 @@
 {
   "name": "storytailor-languageserver",
   "description": "Example implementation of a language server in node.",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "author": "jack.storytailor",
   "license": "MIT",
   "engines": {
@@ -12,7 +12,7 @@
     "url": ""
   },
   "dependencies": {
-    "storytailor": "^0.0.26",
+    "storytailor": "^0.0.27",
     "vscode-languageserver": "^5.2.1"
   },
   "scripts": {

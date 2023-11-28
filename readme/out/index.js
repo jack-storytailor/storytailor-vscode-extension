@@ -9,6 +9,8 @@ __context['system'] = require(`./system`);
 __text : __context['__text']
 };
 ;
+__context['__text'].push(``);
+;
 __context['__text'].push(`# storytailor-vscode`);
 ;
 __context['__text'].push(`extension for vscode that provides support for the storytailor programming language`);
