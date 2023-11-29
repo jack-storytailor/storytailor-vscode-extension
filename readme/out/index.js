@@ -3,10 +3,10 @@ let __context = { __text: [] };
 let __serializer = __env.getSerializer();
 
 __context[`system`] = require(__context[`./system`]);
-	__context = {
-...__context, 
-...__context[`system`], 
-__text : __context[`__text`]
+__context = {
+	...__context, 
+	...__context[`system`], 
+	__text : __context[`__text`]
 };
 __context['__text'].push(``);
 __context['__text'].push(`# storytailor-vscode`);
