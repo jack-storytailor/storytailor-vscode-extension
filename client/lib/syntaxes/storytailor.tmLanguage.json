@@ -464,12 +464,12 @@
       "patterns": [
         {
           "name": "expression_keywords",
-          "match": "\\b(delete|typeof|debugger|try|catch|finally|throw|Object|continue|var|let|const|require|function|new|this|while|for|do|in|if|is|as|return|default|true|false|else|break|switch|case|null|undefined|import|default|from)\\b",
+          "match": "\\b(delete|typeof|debugger|try|catch|super|class|extends|finally|throw|Object|continue|var|let|const|require|function|new|this|while|for|do|in|of|if|is|as|return|default|true|false|else|break|switch|case|null|undefined|import|default|from)\\b",
           "captures": {"0": { "patterns": [{"include": "#keyword-3-marker"}] }}
         },
         {
           "name": "operators",
-          "match": "\\+|\\-|\\=|\\!\\=|\\!\\>|\\!\\<|\\*|\\%|\\>|\\<|\\^|\\&|\\||\\/|\\.",
+          "match": "\\+|\\-|\\=|\\!\\=|\\!\\>|\\!\\<|\\*|\\%|\\>|\\<|\\^|\\&|\\||\\/|\\.|\\?",
           "captures": {"0": {"patterns": [{"include": "#operator-marker"}]}}
         },
         {
