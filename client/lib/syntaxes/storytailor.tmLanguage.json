@@ -1,566 +1,984 @@
 {
-  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "StoryTailor",
-  "scopeName": "source.storytailor",
-  "patterns": [
-    {
-      "include": "#storytailor"
-    }
-  ],
-  "repository": {
-    
-    "storytailor": {
-      "patterns": [
-        {
-          "include": "#comment-line"
-        },
-        {
-          "include": "#comment-block"
-        },
-        {
-          "include": "#outer-block-scope"
-        },
-        {
-          "include": "#outer-expression"
-        }
-      ]
-    },
-  
-    "outer-expression": {
-      "patterns": [
-        {
-          "include": "#outer-variable"
-        },
-        {
-          "include": "#template-line"
-        }
-      ]
-    },
-
-    "expression": {
-      "patterns": [
-        {
-          "include": "#string-scope"
-        },
-        {
-          "include": "#prime-string-scope"
-        },
-        {
-          "include": "#variable-scope"
-        },
-        {
-          "include": "#paren-scope"
-        },
-        {
-          "include": "#block-scope"
-        },
-        {
-          "include": "#array-scope"
-        },
-        {
-          "include": "#comment-line"
-        },
-        {
-          "include": "#comment-block"
-        },
-        {
-          "include": "#operator"
-        },
-        {
-          "include": "#number"
-        },
-        {
-          "include": "#variable"
-        }
-      ]
-    },
-
-    "varname-expression": {
-      "patterns": [
-        {
-          "include": "#string-scope"
-        },
-        {
-          "include": "#prime-string-scope"
-        },
-        {
-          "include": "#variable-scope"
-        },
-        {
-          "include": "#paren-scope"
-        },
-        {
-          "include": "#block-scope"
-        },
-        {
-          "include": "#array-scope"
-        },
-        {
-          "include": "#comment-line"
-        },
-        {
-          "include": "#comment-block"
-        },
-        {
-          "include": "#operator"
-        },
-        {
-          "include": "#number"
-        },
-        {
-          "include": "#varname-variable"
-        }
-      ]
-    },
-
-    "array-scope": {
-      "patterns": [
-        {
-          "name": "array.scope",
-          "begin": "\\[",
-          "end": "\\]",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "patterns": [{ "include": "#expression" }]
-        }
-      ]
-    },
-
-    "array-scope-remove": {
-      "patterns": [
-        {
-          "name": "array.scope",
-          "begin": "\\-\\[",
-          "end": "\\]",
-          "beginCaptures": {"0": {"patterns": [{"match": ".*", "name": "invalid"}]}},
-          "endCaptures": {"0": {"patterns": [{"match": ".*", "name": "invalid"}]}},
-          "patterns": [{ "include": "#expression" }]
-        },
-        {
-          "name": "array.scope",
-          "match": "\\+\\[\\]",
-          "captures": {"0": {"patterns": [{"match": ".*", "name": "support.type"}]}}
-        }
-      ]
-    },
-
-    "paren-scope": {
-      "patterns": [
-        {
-          "name": "scope.paren",
-          "begin": "\\(",
-          "end": "\\)",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "patterns": [{ "include": "#expression" }]
-        }
-      ]
-    },
-
-    "block-scope": {
-      "patterns": [
-        {
-          "name": "scope.block",
-          "begin": "\\{",
-          "end": "\\}",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "patterns": [{ "include": "#expression" }]
-        }
-      ]
-    },
-
-    "template-block-scope": {
-      "patterns": [
-        {
-          "name": "scope.block.template",
-          "begin": "\\*\\{",
-          "end": "\\}",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "patterns": [{ "include": "#expression" }]
-        }
-      ]
-    },
-
-    "outer-block-scope": {
-      "patterns": [
-        {
-          "name": "outer.scope.block",
-          "begin": "^\\s*\\*\\s\\{",
-          "end": "\\}",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-marker"}]}},
-          "patterns": [{ "include": "#expression" }]
-        }
-      ]
-    },
-
-    "string-scope": {
-      "patterns": [
-        {
-          "name": "scope.string",
-          "begin": "\"",
-          "end": "\"",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-4-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-4-marker"}]}},
-          "patterns": [{ "include": "#template-line" }]
-        }
-      ]
-    },
-
-    "prime-string-scope": {
-      "patterns": [
-        {
-          "name": "scope.string",
-          "begin": "'",
-          "end": "'",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "patterns": [{ "include": "#expression" }]
-        }
-      ]
-    },
-
-    "object-name-scope": {
-      "patterns": [
-        {
-          "name": "scope.object.name",
-          "begin": "\"",
-          "end": "\"",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-2-marker"}]}},
-          "contentName": "string"
-        }
-      ]
-    },
-
-    "tag-scope": {
-      "patterns": [
-        {
-          "name": "scope.tag",
-          "begin": "\\<",
-          "end": "\\>",
-          "beginCaptures": {"0": {"name": "constant.regexp"}},
-          "endCaptures": {"0": {"name": "constant.regexp"}},
-          "patterns": [
-            {
-              "match": "\\+",
-              "name": "comment"
-            },
-            {
-              "match": "\\-",
-              "name": "invalid"
-            },
-            {
-              "match": ".",
-              "name": "support.function"
-            }
-          ]
-        }
-      ]
-    },
-
-    "variable-scope": {
-      "patterns": [
-        {
-          "name": "scope.variable",
-          "begin": "\\*\\\"",
-          "end": "\\\"",
-          "beginCaptures": {"0": {"patterns": [{"include": "#keyword-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#keyword-marker"}]}},
-          "contentName": "variable"
-        }
-      ]
-    },
-
-    "variable": {
-      "patterns": [
-        {
-          "match": "\\\\[nrt]",
-          "name": "keyword"
-        },
-        {
-          "match": "(`|\\\\)(.)",
-          "captures": {
-            "1": {"name": "keyword"},
-            "2": {"name": "variable"}
-          }
-        },
-        {
-          "include": "#expression-keywords"
-        },
-        {
-          "name": "variable",
-          "match": "[\\w]+"
-        }
-      ]
-    },
-
-    "varname-variable": {
-      "patterns": [
-        {
-          "match": "\\\\[nrt]",
-          "name": "keyword"
-        },
-        {
-          "match": "(`|\\\\)(.)",
-          "captures": {
-            "1": {"name": "keyword"},
-            "2": {"name": "string"}
-          }
-        },
-        {
-          "include": "#expression-keywords"
-        },
-        {
-          "name": "string",
-          "match": "[\\w]+"
-        }
-      ]
-    },
-
-    "operator": {
-      "patterns": [
-        {
-          "match": "\\+|\\-|\\=|\\;|\\/|\\*|\\?|\\:|\\^|\\%|\\@|\\#|\\!|\\,|\\.|\\>|\\<",
-          "name": "operator",
-          "captures": {"0": {"patterns": [{"include": "#operator-marker"}]}}
-        }
-      ]
-    },
-
-    "number": {
-      "patterns": [
-        {
-          "match": "\\b\\d+(\\.\\d+)?\\b",
-          "name": "constant.numeric"
-        }
-      ]
-    },
-
-    "escaped-char": {
-      "patterns": [
-        {
-          "match": "\\\\[nrt]",
-          "name": "keyword"
-        },
-        {
-          "match": "(\\\\).",
-          "captures": {"1":{"name": "keyword"}}
-        }
-      ]
-    },
-
-    "template-line": {
-      "patterns": [
-        {
-          "include": "#escaped-char"
-        },
-        {
-          "include": "#template-mention"
-        }
-      ]
-    },
-
-    "template-mention": {
-      "patterns": [
-        {
-          "include": "#template-block-scope"
-        },
-        {
-          "begin": "\\*(?=[^\\s])",
-          "end": ";|$",
-          "name": "mentiontemplate",
-          "beginCaptures": {"0": {"patterns": [{"include": "#operator-marker"}]}},
-          "endCaptures": {"0": {"patterns": [{"include": "#operator-marker"}]}},
-          "patterns": [
-            {
-              "include": "#expression"
-            }
-          ]
-        }
-      ]
-    },
-
-    "backup-outer-variable": {
-      "patterns": [
-        {
-          "begin": "(?:^)\\s*(\\*[\\+\\-\\!\\?\\=]*)\\s((\\\\.|[^\\:^\\=^$])*)",
-          "end": "$"
-        }
-      ]
-    },
-
-    "outer-variable": {
-      "patterns": [
-        {
-          "begin": "^(?=\\s*(\\*[\\+\\-\\!\\?\\=]*)\\s)",
-          "end": "$",
-          "name": "outer.variable",
-          "beginCaptures": {
-            "1": { 
-              "patterns": [
-                {
-                  "name": "star.keyword",
-                  "include": "#keyword-2-marker"
-                }
-              ] 
-            },
-            "2": { 
-              "patterns": [
-                {
-                  "include": "#comment-line"
-                },
-                {
-                  "match": "\\\\[nrt]",
-                  "name": "keyword"
-                },
-                {
-                  "match": "(\\\\)(.)",
-                  "captures": {
-                    "1": {"name": "keyword"},
-                    "2": {"name": "string"}
-                  }
-                },
-                {
-                  "include": "#object-name-scope"
-                },
-                {
-                  "include": "#tag-scope"
-                },
-                {
-                  "include": "#array-scope"
-                },
-                {
-                  "include": "#array-scope-remove"
-                },
-                {
-                  "include": "#template-mention"
-                },
-                {
-                  "match": ".",
-                  "name": "string"
-                }
-              ]
-            }
-          },
-          "endCaptures": {
-            "0": { "patterns": [{"include": "#keyword-marker"}] }
-          },
-          "patterns": [
-            {
-              "include": "#tag-scope"
-            },
-            { 
-              "include": "#varname-expression" 
-            }
-          ]
-        }
-      ]
-    },
-
-    "expression-keywords": {
-      "patterns": [
-        {
-          "name": "expression_keywords",
-          "match": "\\b(delete|typeof|debugger|try|catch|yield|super|class|extends|async|await|get|set|finally|throw|Object|continue|var|let|const|require|function|new|this|while|for|do|in|of|if|static|is|as|return|default|true|false|else|break|switch|case|null|undefined|import|default|from)\\b",
-          "captures": {"0": { "patterns": [{"include": "#keyword-3-marker"}] }}
-        },
-        {
-          "name": "operators",
-          "match": "\\+|\\-|\\=|\\!\\=|\\!\\>|\\!\\<|\\*|\\%|\\>|\\<|\\^|\\&|\\||\\/|\\.|\\?",
-          "captures": {"0": {"patterns": [{"include": "#operator-marker"}]}}
-        },
-        {
-          "name": "keywords2",
-          "match": "\\?\\+|\\?\\-|\\?|\\:|\\!|\\,|\\;|\\@|\\`",
-          "captures": { "0": { "patterns": [{"include": "#keyword-2-marker"}] } }
-        }
-      ]
-    },
-    
-    "keyword-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "keyword"
-        }
-      ]
-    },
-
-    "keyword-2-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "support.function"
-        }
-      ]
-    },
-
-    "keyword-3-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "keyword.control"
-        }
-      ]
-    },
-
-    "keyword-4-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "string.quoted"
-        }
-      ]
-    },
-
-    "operator-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "constant.character.escape"
-        }
-      ]
-    },
-
-    "function-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "support.function"
-        }
-      ]
-    },
-
-    "text-marker": {
-      "patterns": [
-        {
-          "match": ".",
-          "name": "string"
-        }
-      ]
-    },
-
-    "comment-line": {
-      "patterns": [
-        {
-          "match": "\\/\\/.*",
-          "name": "comment.line"
-        }
-      ]
-    },
-
-    "comment-block": {
-      "patterns": [
-        {
-          "begin": "\\/\\*",
-          "end": "\\*\\/",
-          "name": "comment.block"
-        }
-      ]
-    }
-    
-  }
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "StoryTailor",
+	"scopeName": "source.storytailor",
+	"patterns": [
+		{
+			"include": "#storytailor"
+		}
+	],
+	"repository": {
+		"storytailor": {
+			"patterns": [
+				{
+					"include": "#comment-line"
+				},
+				{
+					"include": "#comment-block"
+				},
+				{
+					"include": "#outer-block-scope"
+				},
+				{
+					"include": "#outer-expression"
+				}
+			]
+		},
+		"outer-expression": {
+			"patterns": [
+				{
+					"include": "#outer-variable"
+				},
+				{
+					"include": "#template-line"
+				}
+			]
+		},
+		"expression": {
+			"patterns": [
+				{
+					"include": "#regex"
+				},
+				{
+					"include": "#string-scope"
+				},
+				{
+					"include": "#prime-string-scope"
+				},
+				{
+					"include": "#variable-scope"
+				},
+				{
+					"include": "#paren-scope"
+				},
+				{
+					"include": "#block-scope"
+				},
+				{
+					"include": "#array-scope"
+				},
+				{
+					"include": "#comment-line"
+				},
+				{
+					"include": "#comment-block"
+				},
+				{
+					"include": "#number"
+				},
+				{
+					"include": "#variable"
+				},
+				{
+					"include": "#operator"
+				}
+			]
+		},
+		"varname-expression": {
+			"patterns": [
+				{
+					"include": "#string-scope"
+				},
+				{
+					"include": "#prime-string-scope"
+				},
+				{
+					"include": "#variable-scope"
+				},
+				{
+					"include": "#paren-scope"
+				},
+				{
+					"include": "#block-scope"
+				},
+				{
+					"include": "#array-scope"
+				},
+				{
+					"include": "#comment-line"
+				},
+				{
+					"include": "#comment-block"
+				},
+				{
+					"include": "#operator"
+				},
+				{
+					"include": "#number"
+				},
+				{
+					"include": "#varname-variable"
+				}
+			]
+		},
+		"array-scope": {
+			"patterns": [
+				{
+					"name": "array.scope",
+					"begin": "\\[",
+					"end": "\\]",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"array-scope-remove": {
+			"patterns": [
+				{
+					"name": "array.scope",
+					"begin": "\\-\\[",
+					"end": "\\]",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"match": ".*",
+									"name": "invalid"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"match": ".*",
+									"name": "invalid"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				},
+				{
+					"name": "array.scope",
+					"match": "\\+\\[\\]",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"match": ".*",
+									"name": "support.type"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"paren-scope": {
+			"patterns": [
+				{
+					"name": "scope.paren",
+					"begin": "\\(",
+					"end": "\\)",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"block-scope": {
+			"patterns": [
+				{
+					"name": "scope.block",
+					"begin": "\\{",
+					"end": "\\}",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"template-block-scope": {
+			"patterns": [
+				{
+					"name": "scope.block.template",
+					"begin": "\\*\\{",
+					"end": "\\}",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"outer-block-scope": {
+			"patterns": [
+				{
+					"name": "outer.scope.block",
+					"begin": "^\\s*\\*\\s\\{",
+					"end": "\\}",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"string-scope": {
+			"patterns": [
+				{
+					"name": "scope.string1",
+					"begin": "\"",
+					"end": "\"",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-4-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-4-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#template-line"
+						}
+					]
+				}
+			]
+		},
+		"prime-string-scope": {
+			"patterns": [
+				{
+					"name": "scope.string",
+					"begin": "'",
+					"end": "'",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"object-name-scope": {
+			"patterns": [
+				{
+					"name": "scope.object.name",
+					"begin": "\"",
+					"end": "\"",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					},
+					"contentName": "string"
+				}
+			]
+		},
+		"tag-scope": {
+			"patterns": [
+				{
+					"name": "scope.tag",
+					"begin": "\\<",
+					"end": "\\>",
+					"beginCaptures": {
+						"0": {
+							"name": "constant.regexp"
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"name": "constant.regexp"
+						}
+					},
+					"patterns": [
+						{
+							"match": "\\+",
+							"name": "comment"
+						},
+						{
+							"match": "\\-",
+							"name": "invalid"
+						},
+						{
+							"match": ".",
+							"name": "support.function"
+						}
+					]
+				}
+			]
+		},
+		"variable-scope": {
+			"patterns": [
+				{
+					"name": "scope.variable",
+					"begin": "\\*\\\"",
+					"end": "\\\"",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-marker"
+								}
+							]
+						}
+					},
+					"contentName": "variable"
+				}
+			]
+		},
+		"variable": {
+			"patterns": [
+				{
+					"match": "\\\\[nrt]",
+					"name": "keyword"
+				},
+				{
+					"match": "(`|\\\\)(.)",
+					"captures": {
+						"1": {
+							"name": "keyword"
+						},
+						"2": {
+							"name": "variable"
+						}
+					}
+				},
+				{
+					"include": "#expression-keywords"
+				},
+				{
+					"name": "variable",
+					"match": "[\\w]+"
+				}
+			]
+		},
+		"varname-variable": {
+			"patterns": [
+				{
+					"match": "\\\\[nrt]",
+					"name": "keyword"
+				},
+				{
+					"match": "(`|\\\\)(.)",
+					"captures": {
+						"1": {
+							"name": "keyword"
+						},
+						"2": {
+							"name": "string"
+						}
+					}
+				},
+				{
+					"include": "#expression-keywords"
+				},
+				{
+					"name": "string",
+					"match": "[\\w]+"
+				}
+			]
+		},
+		"operator": {
+			"patterns": [
+				{
+					"match": "\\+|\\-|\\=|\\;|\\/|\\*|\\?|\\:|\\^|\\%|\\@|\\#|\\!|\\,|\\.|\\>|\\<",
+					"name": "operator",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#operator-marker"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"number": {
+			"patterns": [
+				{
+					"match": "\\b\\d+(\\.\\d+)?\\b",
+					"name": "constant.numeric"
+				}
+			]
+		},
+		"escaped-char": {
+			"patterns": [
+				{
+					"match": "\\\\[nrt]",
+					"name": "keyword"
+				},
+				{
+					"match": "(\\\\).",
+					"captures": {
+						"1": {
+							"name": "keyword"
+						}
+					}
+				}
+			]
+		},
+		"template-line": {
+			"patterns": [
+				{
+					"include": "#escaped-char"
+				},
+				{
+					"include": "#template-mention"
+				}
+			]
+		},
+		"template-mention": {
+			"patterns": [
+				{
+					"include": "#template-block-scope"
+				},
+				{
+					"begin": "\\*(?=[^\\s])",
+					"end": ";|$",
+					"name": "mentiontemplate",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#operator-marker"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#operator-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
+		"backup-outer-variable": {
+			"patterns": [
+				{
+					"begin": "(?:^)\\s*(\\*[\\+\\-\\!\\?\\=]*)\\s((\\\\.|[^\\:^\\=^$])*)",
+					"end": "$"
+				}
+			]
+		},
+		"outer-variable": {
+			"patterns": [
+				{
+					"begin": "^(?=\\s*(\\*[\\+\\-\\!\\?\\=]*)\\s)",
+					"end": "$",
+					"name": "outer.variable",
+					"beginCaptures": {
+						"1": {
+							"patterns": [
+								{
+									"name": "star.keyword",
+									"include": "#keyword-2-marker"
+								}
+							]
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#comment-line"
+								},
+								{
+									"match": "\\\\[nrt]",
+									"name": "keyword"
+								},
+								{
+									"match": "(\\\\)(.)",
+									"captures": {
+										"1": {
+											"name": "keyword"
+										},
+										"2": {
+											"name": "string"
+										}
+									}
+								},
+								{
+									"include": "#object-name-scope"
+								},
+								{
+									"include": "#tag-scope"
+								},
+								{
+									"include": "#array-scope"
+								},
+								{
+									"include": "#array-scope-remove"
+								},
+								{
+									"include": "#template-mention"
+								},
+								{
+									"match": ".",
+									"name": "string"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-marker"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#tag-scope"
+						},
+						{
+							"include": "#varname-expression"
+						}
+					]
+				}
+			]
+		},
+		"expression-keywords": {
+			"patterns": [
+				{
+					"name": "expression_keywords",
+					"match": "\\b(delete|typeof|debugger|try|catch|yield|super|class|extends|async|await|get|set|finally|throw|Object|continue|var|let|const|require|function|new|this|while|for|do|in|of|if|static|is|as|return|default|true|false|else|break|switch|case|null|undefined|import|default|from)\\b",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-3-marker"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "operators",
+					"match": "\\+|\\-|\\=|\\!\\=|\\!\\>|\\!\\<|\\*|\\%|\\>|\\<|\\^|\\&|\\||\\/|\\.|\\?",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#operator-marker"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "keywords2",
+					"match": "\\?\\+|\\?\\-|\\?|\\:|\\!|\\,|\\;|\\@|\\`",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#keyword-2-marker"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"keyword-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "keyword"
+				}
+			]
+		},
+		"keyword-2-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "support.function"
+				}
+			]
+		},
+		"keyword-3-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "keyword.control"
+				}
+			]
+		},
+		"keyword-4-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "string.quoted"
+				}
+			]
+		},
+		"operator-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "constant.character.escape"
+				}
+			]
+		},
+		"function-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "support.function"
+				}
+			]
+		},
+		"text-marker": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "string"
+				}
+			]
+		},
+		"comment-line": {
+			"patterns": [
+				{
+					"match": "\\/\\/.*",
+					"name": "comment.line"
+				}
+			]
+		},
+		"comment-block": {
+			"patterns": [
+				{
+					"begin": "\\/\\*",
+					"end": "\\*\\/",
+					"name": "comment.block"
+				}
+			]
+		},
+		"regex": {
+			"patterns": [
+				{
+					"name": "constant.regexp",
+					"begin": "\/",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.js"
+						}
+					},
+					"end": "\/([gimuys]*)",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.js"
+						},
+						"2": {
+							"name": "keyword.other.js"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#regexp"
+						}
+					]
+				}
+			]
+		},
+		"regexp": {
+			"patterns": [
+				{
+					"name": "keyword.control.anchor.regexp",
+					"match": "\\\\[bB]|\\^|\\$"
+				},
+				{
+					"name": "keyword.other.back-reference.regexp",
+					"match": "\\\\[1-9]\\d*"
+				},
+				{
+					"name": "keyword.operator.quantifier.regexp",
+					"match": "[?+*]|\\{(\\d+,\\d+|\\d+,|,\\d+|\\d+)\\}\\??"
+				},
+				{
+					"name": "keyword.operator.or.regexp",
+					"match": "\\|"
+				},
+				{
+					"name": "meta.group.assertion.regexp",
+					"begin": "(\\()((\\?=)|(\\?!))",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.group.regexp"
+						},
+						"2": {
+							"name": "punctuation.definition.group.assertion.regexp"
+						},
+						"3": {
+							"name": "meta.assertion.look-ahead.regexp"
+						},
+						"4": {
+							"name": "meta.assertion.negative-look-ahead.regexp"
+						}
+					},
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.group.regexp"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#regexp"
+						}
+					]
+				},
+				{
+					"name": "meta.group.regexp",
+					"begin": "\\((\\?:)?",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.group.regexp"
+						},
+						"1": {
+							"name": "punctuation.definition.group.no-capture.regexp"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.group.regexp"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#regexp"
+						}
+					]
+				},
+				{
+					"name": "constant.other.character-class.set.regexp",
+					"begin": "(\\[)(\\^)?",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.character-class.regexp"
+						},
+						"2": {
+							"name": "keyword.operator.negation.regexp"
+						}
+					},
+					"end": "(\\])",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.character-class.regexp"
+						}
+					},
+					"patterns": [
+						{
+							"name": "constant.other.character-class.range.regexp",
+							"match": "(?:.|(\\\\(?:[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}))|(\\\\c[A-Z])|(\\\\.))\\-(?:[^\\]\\\\]|(\\\\(?:[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}))|(\\\\c[A-Z])|(\\\\.))",
+							"captures": {
+								"1": {
+									"name": "constant.character.numeric.regexp"
+								},
+								"2": {
+									"name": "constant.character.control.regexp"
+								},
+								"3": {
+									"name": "constant.character.escape.backslash.regexp"
+								},
+								"4": {
+									"name": "constant.character.numeric.regexp"
+								},
+								"5": {
+									"name": "constant.character.control.regexp"
+								},
+								"6": {
+									"name": "constant.character.escape.backslash.regexp"
+								}
+							}
+						},
+						{
+							"include": "#regex-character-class"
+						}
+					]
+				},
+				{
+					"include": "#regex-character-class"
+				}
+			]
+		},
+		"regex-character-class": {
+			"patterns": [
+				{
+					"name": "constant.other.character-class.regexp",
+					"match": "\\\\[wWsSdDtrnvf]|\\."
+				},
+				{
+					"name": "constant.character.numeric.regexp",
+					"match": "\\\\([0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4})"
+				},
+				{
+					"name": "constant.character.control.regexp",
+					"match": "\\\\c[A-Z]"
+				},
+				{
+					"name": "constant.character.escape.backslash.regexp",
+					"match": "\\\\."
+				}
+			]
+		}
+	}
 }
