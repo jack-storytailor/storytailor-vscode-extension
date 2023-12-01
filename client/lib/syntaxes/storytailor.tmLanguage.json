@@ -37,9 +37,6 @@
 		"expression": {
 			"patterns": [
 				{
-					"include": "#regex"
-				},
-				{
 					"include": "#string-scope"
 				},
 				{
@@ -62,6 +59,9 @@
 				},
 				{
 					"include": "#comment-block"
+				},
+				{
+					"include": "#regex"
 				},
 				{
 					"include": "#number"
@@ -667,6 +667,9 @@
 								},
 								{
 									"include": "#template-mention"
+								},
+								{
+									"include": "#regex"
 								},
 								{
 									"match": ".",
