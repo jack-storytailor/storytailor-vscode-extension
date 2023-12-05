@@ -12,6 +12,7 @@
     "url": ""
   },
   "dependencies": {
+    "acorn": "^8.11.2",
     "storytailor": "^0.0.41",
     "vscode-languageserver": "^5.2.1"
   },

@@ -7,6 +7,7 @@
 	"version": "0.0.61",
 	"publisher": "jackstorytailor",
 	"dependencies": {
+		"acorn": "^8.11.2",
 		"storytailor": "^0.0.41",
 		"vscode-languageclient": "^5.2.1"
 	},
