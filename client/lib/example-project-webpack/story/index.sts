@@ -1,7 +1,7 @@
 // import declarations
-* import * as chapter1 from './lib/chapter1'
-* import * as chapter2 from './lib/chapter2'
-* import * as characters from './lib/characters'
+* import * as chapter1 from "./lib/chapter1"
+* import * as chapter2 from "./lib/chapter2"
+* import * as characters from "./lib/characters"
 
 // one line after import declaration can be skipped and it won't be in a final text
 The example story
@@ -20,7 +20,7 @@ And here is our winner: *characters.Protagonist;
 --------------------------------
 and here how you can call functions.
 let's reference module storytailor/out/environment from node_modules
-* import * as environment2 from 'storytailor/out/environment'
+* import * as environment2 from "storytailor/out/environment"
 
 this module (*environment2.toString();) contains testFunction(param1, param2) that can be called from mention:
 
