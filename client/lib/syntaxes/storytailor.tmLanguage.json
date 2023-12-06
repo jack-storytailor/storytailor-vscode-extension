@@ -30,6 +30,9 @@
 					"include": "#outer-import"
 				},
 				{
+					"include": "#outer-delete"
+				},
+				{
 					"include": "#outer-variable"
 				},
 				{
@@ -623,12 +626,48 @@
 				}
 			]
 		},
+		"outer-delete": {
+			"patterns": [
+				{
+					"begin": "^\\s*\\*\\sdelete\\s",
+					"end": "$",
+					"name": "outer.delete",
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#expression"
+								}
+							]
+						}
+					},
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				}
+			]
+		},
 		"outer-variable": {
 			"patterns": [
 				{
-					"begin": "^\\s*\\*\\s",
+					"begin": "^(?=\\s*(\\*)\\s)",
 					"end": "$",
 					"name": "outer.variable",
+					"beginCaptures": {
+						"1": {
+							"patterns": [
+								{
+									"match": "\\-",
+									"name": "invalid"
+								},
+								{
+									"include": "#operator"
+								}
+							]
+						}
+					},
 					"patterns": [
 						{
 							"include": "#outer-variable-name"
