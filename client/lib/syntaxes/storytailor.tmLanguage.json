@@ -383,7 +383,7 @@
 					},
 					"patterns": [
 						{
-							"include": "#escaped-char"
+							"include": "#escaped-char-outer-variable-name"
 						},
 						{
 							"include": "#template-mention"
@@ -550,6 +550,25 @@
 				}
 			]
 		},
+		"escaped-char-outer-variable-name": {
+			"patterns": [
+				{
+					"match": "\\\\[nrt]",
+					"name": "keyword"
+				},
+				{
+					"match": "(\\\\).",
+					"captures": {
+						"1": {
+							"name": "keyword"
+						},
+						"0": {
+							"name": "string"
+						}
+					}
+				}
+			]
+		},
 		"template-line": {
 			"patterns": [
 				{
@@ -691,6 +710,9 @@
 						},
 						{
 							"include": "#prime-string-scope"
+						},
+						{
+							"include": "#escaped-char-outer-variable-name"
 						},
 						{
 							"match": ".",
