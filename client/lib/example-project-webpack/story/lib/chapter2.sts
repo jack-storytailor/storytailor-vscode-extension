@@ -1,4 +1,4 @@
-* import * as characters from "./characters"
+* import characters from "./characters"
 
 Chapter 2
 
