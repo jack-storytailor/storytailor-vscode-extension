@@ -2,7 +2,7 @@ let __env = require(`\.\./src/environment`);
 let __context = { __text: [] };
 let __serializer = __env.getSerializer();
 
-__context[`system`] = require(__context[`./system`]);
+import * as system from __context[`./system`];
 __context = {
 	...__context, 
 	...__context[`system`], 
