@@ -744,7 +744,7 @@
 			"patterns": [
 				{
 					"name": "expression_keywords",
-					"match": "\\b(delete|typeof|debugger|try|catch|yield|super|class|extends|async|await|get|set|finally|throw|Object|continue|var|let|const|require|function|new|this|while|for|do|in|of|if|static|is|as|return|default|true|false|else|break|switch|case|null|undefined|import|default|from)\\b",
+					"match": "\\b(delete|typeof|debugger|try|catch|yield|super|class|extends|async|await|get|set|finally|throw|Object|continue|var|let|const|require|function|new|this|while|for|do|in|of|if|static|is|as|return|default|true|false|else|break|switch|case|null|undefined|import|export|default|from)\\b",
 					"captures": {
 						"0": {
 							"patterns": [
@@ -856,7 +856,17 @@
 				}
 			]
 		},
-		"regex": {
+		"regex" : {
+			"match": "\/(\\\/|[^\/\n\r])*\/[gimuys]*(?=[\\s*$;\\.\\+\\-\\*\/\\%\\^\\<\\>\\|\\[\\]])",
+			"name": "string.regexp",
+			"patterns": [
+				{
+					"match": ".",
+					"include": "#regex2"
+				}
+			]
+		},
+		"regex2": {
 			"patterns": [
 				{
 					"name": "constant.regexp",
