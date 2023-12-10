@@ -100,3 +100,5 @@ __context.__text.push(`${__serializer.serialize( __context.localPhoto(`story_out
 
 // INFO: this trick is for making this file node module
 Object.assign(module.exports, __context);
+
+//# sourceMappingURL=/Users/jack/Documents/SEA/Git/storytailor-vscode-extension/readme/out/index.js.map

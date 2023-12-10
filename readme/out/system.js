@@ -17,3 +17,5 @@ __context.localPhoto = function(урл, текст, imgRoot) {
 
 // INFO: this trick is for making this file node module
 Object.assign(module.exports, __context);
+
+//# sourceMappingURL=/Users/jack/Documents/SEA/Git/storytailor-vscode-extension/readme/out/system.js.map

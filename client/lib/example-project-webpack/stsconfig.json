@@ -13,5 +13,7 @@
   "include": [
     ".*\\.sts"
   ],
-  "indentSize": 4
+  "indentSize": 4,
+  
+  "jsMode": "CommonJs"
 }

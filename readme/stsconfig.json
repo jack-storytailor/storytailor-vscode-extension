@@ -1,13 +1,19 @@
 {
   "sourceRoot": "./story",
   "environmentPath": "../src/environment",
+  
   "isEmitJavascript": true,
   "javascriptOutputRoot": "./out",
+  "isEmitSourceMaps": true,
+
   "exclude": [
     ".*/node_modules/.*"
   ],
+
   "include": [
     ".*\\.sts"
   ],
-  "indentSize": 4
+  "indentSize": 4,
+
+  "jsMode": "CommonJs"
 }
