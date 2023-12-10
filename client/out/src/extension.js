@@ -414,7 +414,6 @@ const readConfiguration = () => {
     else {
         settings = Object.assign({}, defaultSettings);
     }
-    console.log('settings are ', settings);
 };
 function initStorytailorWebviewPanel() {
     storytailorPreviewPanel = vscode.window.createWebviewPanel('storytailor-preview', 'Preview story', {

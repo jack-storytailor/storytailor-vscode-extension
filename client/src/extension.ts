@@ -508,8 +508,6 @@ const readConfiguration = () => {
 	else {
 		settings = { ...defaultSettings };
 	}
-
-	console.log('settings are ', settings);
 }
 
 function initStorytailorWebviewPanel() {
