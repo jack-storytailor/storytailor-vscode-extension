@@ -6,8 +6,8 @@ let __serializer = __env.getSerializer();
 import * as system from __context[`./system`];
 __context = {
 	...__context, 
-	...system, 
-	__text : __text
+	...__context.system, 
+	__text : __context.__text
 };
 __context.__text.push(``);
 __context.__text.push(`# storytailor-vscode`);
