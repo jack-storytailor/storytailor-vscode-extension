@@ -724,6 +724,9 @@
 					},
 					"patterns": [
 						{
+							"include": "#outer-variable-name-prime"
+						},
+						{
 							"include": "#outer-variable-name"
 						},
 						{
@@ -739,6 +742,42 @@
 					"begin": "^\\s*\\*",
 					"end": "=|$",
 					"name": "outer.variable.name",
+					"patterns": [
+						{
+							"include": "#escaped-char-outer-variable-name"
+						},
+						{
+							"match": ".",
+							"name": "string"
+						}
+					],
+					"beginCaptures": {
+						"0": {
+							"patterns": [
+								{
+									"include": "#operator"
+								}
+							]
+						}
+					},
+					"endCaptures": {
+						"0":{
+							"patterns": [
+								{
+									"include": "#operator"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"outer-variable-name-prime": {
+			"patterns": [
+				{
+					"begin": "^\\s*\\*\\s+(?=\\')",
+					"end": "=|$",
+					"name": "outer.variable.name.prime",
 					"patterns": [
 						{
 							"include": "#tag-scope"
