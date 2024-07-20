@@ -1,4 +1,4 @@
-let __env = require(`\.\./src/environment`);
+let __env = require(`\.\.\\src/environment`);
 let __text = [];
 let __context = { __text };
 let __serializer = __env.getSerializer();
@@ -9,7 +9,7 @@ __context.hyperlink = function(урл, текст) {
 __context.__text.push(``);
 __context.localPhoto = function(урл, текст, imgRoot) { 
 	if (!imgRoot) { 
-		imgRoot = `https:\//raw.githubusercontent.com/jack-storytailor/storytailor-vscode-extension/master/client/lib/images/`;
+		imgRoot = "https:\//raw.githubusercontent.com/jack-storytailor/storytailor-vscode-extension/master/client/lib/images/";
 	};
 	return `![${__serializer.serialize( текст, '\r\n' )}](${__serializer.serialize( imgRoot, '\r\n' )}${__serializer.serialize( урл, '\r\n' )})`;
 };
@@ -18,4 +18,4 @@ __context.localPhoto = function(урл, текст, imgRoot) {
 // INFO: this trick is for making this file node module
 Object.assign(module.exports, __context);
 
-//# sourceMappingURL=/Users/jack/Documents/SEA/Git/storytailor-vscode-extension/readme/out/system.js.map
+//# sourceMappingURL=C:\Projects\storytailor-vscode-extension\readme\out\system.js.map

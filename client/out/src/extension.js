@@ -40,7 +40,7 @@ const getRootFolderForActiveEditor = () => {
     if (activeTextEditor && activeTextEditor.document) {
         let wpF = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(activeTextEditor.document.fileName));
         if (wpF && wpF.uri) {
-            let workspaceFolder = wpF.uri.path;
+            let workspaceFolder = wpF.uri.fsPath;
             return workspaceFolder;
         }
     }
@@ -52,7 +52,7 @@ const stsCompile = (workspaceFolder) => {
         if (!workspaceFolder) {
             let folders = vscode.workspace.workspaceFolders;
             if (folders && folders.length > 0) {
-                workspaceFolder = folders[0].uri.path;
+                workspaceFolder = folders[0].uri.fsPath;
             }
         }
     }
@@ -224,7 +224,7 @@ const initExampleProject = () => {
     if (!workspaceFolder) {
         let folders = vscode.workspace.workspaceFolders;
         if (folders && folders.length > 0) {
-            workspaceFolder = folders[0].uri.path;
+            workspaceFolder = folders[0].uri.fsPath;
         }
     }
     if (workspaceFolder) {
@@ -245,7 +245,7 @@ const initExampleProjectWebpack = () => {
     if (!workspaceFolder) {
         let folders = vscode.workspace.workspaceFolders;
         if (folders && folders.length > 0) {
-            workspaceFolder = folders[0].uri.path;
+            workspaceFolder = folders[0].uri.fsPath;
         }
     }
     if (workspaceFolder) {
@@ -267,7 +267,7 @@ const updateNodeModules = () => {
     if (!workspaceFolder) {
         let folders = vscode.workspace.workspaceFolders;
         if (folders && folders.length > 0) {
-            workspaceFolder = folders[0].uri.path;
+            workspaceFolder = folders[0].uri.fsPath;
         }
     }
     if (!workspaceFolder) {
